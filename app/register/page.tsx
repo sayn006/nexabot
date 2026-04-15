@@ -5,19 +5,47 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+
+    if (password !== confirmPassword) {
+      setError("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("Le mot de passe doit contenir au moins 8 caracteres.");
+      return;
+    }
+
     setLoading(true);
 
     try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password, confirmPassword }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Une erreur est survenue.");
+        setLoading(false);
+        return;
+      }
+
+      // Auto-login after registration
       const result = await signIn("credentials", {
         email,
         password,
@@ -25,20 +53,12 @@ export default function LoginPage() {
       });
 
       if (result?.error) {
-        setError("Email ou mot de passe incorrect.");
+        setError("Compte cree mais connexion echouee. Veuillez vous connecter.");
         setLoading(false);
         return;
       }
 
-      // Fetch session to check role
-      const res = await fetch("/api/auth/session");
-      const session = await res.json();
-
-      if (session?.user?.role === "ADMIN") {
-        router.push("/admin");
-      } else {
-        router.push("/dashboard");
-      }
+      router.push("/dashboard");
     } catch {
       setError("Une erreur est survenue. Veuillez reessayer.");
       setLoading(false);
@@ -57,7 +77,7 @@ export default function LoginPage() {
               Nexa<span style={{ color: "var(--accent)" }}>Bot</span>
             </h1>
             <p className="text-base-content/60 mt-2">
-              Connectez-vous a votre espace
+              Creez votre compte
             </p>
           </div>
 
@@ -84,6 +104,20 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="form-control">
               <label className="label">
+                <span className="label-text font-medium">Nom</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Votre nom"
+                className="input input-bordered w-full"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
                 <span className="label-text font-medium">Email</span>
               </label>
               <input
@@ -107,6 +141,22 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                minLength={8}
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium">Confirmer le mot de passe</span>
+              </label>
+              <input
+                type="password"
+                placeholder="********"
+                className="input input-bordered w-full"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                minLength={8}
               />
             </div>
 
@@ -118,15 +168,15 @@ export default function LoginPage() {
               {loading ? (
                 <span className="loading loading-spinner loading-sm" />
               ) : (
-                "Se connecter"
+                "Creer un compte"
               )}
             </button>
           </form>
 
           <p className="text-center text-sm text-base-content/60 mt-4">
-            Pas encore de compte ?{" "}
-            <Link href="/register" className="link link-primary">
-              Creer un compte
+            Deja un compte ?{" "}
+            <Link href="/login" className="link link-primary">
+              Se connecter
             </Link>
           </p>
         </div>

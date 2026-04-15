@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { PLANS } from "@/lib/stripe-plans";
 import SubscribeButton from "./SubscribeButton";
+import PortalButton from "./PortalButton";
 
 export default async function SubscriptionPage() {
   const session = await auth();
@@ -28,6 +29,7 @@ export default async function SubscriptionPage() {
               Renouvellement le {new Date(subscription.currentPeriodEnd).toLocaleDateString("fr-FR")}
             </p>
           </div>
+          <PortalButton />
         </div>
       )}
 

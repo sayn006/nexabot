@@ -103,17 +103,12 @@ export default async function AgentsPage() {
                           >
                             Modifier
                           </Link>
-                          <form
-                            action={`/api/agents/${agent.id}/delete`}
-                            method="POST"
+                          <Link
+                            href={`/dashboard/agents/${agent.id}`}
+                            className="btn btn-ghost btn-xs text-error"
                           >
-                            <button
-                              type="submit"
-                              className="btn btn-ghost btn-xs text-error"
-                            >
-                              Supprimer
-                            </button>
-                          </form>
+                            Supprimer
+                          </Link>
                         </div>
                       </td>
                     </tr>
