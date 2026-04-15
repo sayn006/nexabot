@@ -2,6 +2,7 @@ import ScrollReveal from "./components/ScrollReveal";
 import StaggerContainer from "./components/StaggerContainer";
 import ChatWidget from "./components/ChatWidget";
 import ContactForm from "./components/ContactForm";
+import MobileNav from "./components/MobileNav";
 
 export default function Home() {
   const F = "var(--font-display)";
@@ -27,9 +28,10 @@ export default function Home() {
             <a href="#tarifs" className="hover:text-[var(--text)] transition">Tarifs</a>
             <a href="#faq" className="hover:text-[var(--text)] transition">FAQ</a>
           </div>
-          <a href="#contact" className="text-white text-[13px] font-semibold px-4 py-2 rounded-lg transition hover:opacity-90" style={{ background: A }}>
+          <a href="#contact" className="hidden md:inline-flex text-white text-[13px] font-semibold px-4 py-2 rounded-lg transition hover:opacity-90" style={{ background: A }}>
             Démo gratuite
           </a>
+          <MobileNav />
         </div>
       </nav>
 
