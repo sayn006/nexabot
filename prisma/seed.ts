@@ -2,7 +2,7 @@ import { PrismaClient } from "../app/generated/prisma/client.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 import bcrypt from "bcryptjs";
 
-const adapter = new PrismaPg({ connectionString: "postgresql://phantom@localhost:5432/nexabot" });
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL || "postgresql://phantom@localhost:5432/nexabot" });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
