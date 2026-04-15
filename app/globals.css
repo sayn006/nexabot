@@ -1,4 +1,28 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+  themes: false;
+}
+@plugin "daisyui/theme" {
+  name: "nexabot";
+  default: true;
+  color-scheme: light;
+  --color-base-100: #fafaf8;
+  --color-base-200: #f0efeb;
+  --color-base-300: #e8e8e2;
+  --color-base-content: #1a1a2e;
+  --color-primary: #0dca7a;
+  --color-primary-content: #ffffff;
+  --color-secondary: #6366f1;
+  --color-secondary-content: #ffffff;
+  --color-accent: #0dca7a;
+  --color-accent-content: #ffffff;
+  --color-neutral: #1a1a2e;
+  --color-neutral-content: #ffffff;
+  --color-info: #3b82f6;
+  --color-success: #0dca7a;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+}
 
 :root {
   --bg: #fafaf8;

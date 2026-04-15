@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "contact@emcorp.io";
@@ -14,6 +15,17 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Save lead to database
+    await prisma.lead.create({
+      data: {
+        name,
+        email,
+        company: company || null,
+        message,
+        source: "CONTACT_FORM",
+      },
+    });
 
     if (!RESEND_API_KEY) {
       return NextResponse.json(
