@@ -60,7 +60,7 @@ export default function ChatWidget() {
       </button>
 
       {open && (
-        <div className="fixed bottom-20 right-5 z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[480px] max-h-[calc(100vh-7rem)] rounded-2xl shadow-2xl flex flex-col overflow-hidden border" style={{ background: "#fff", borderColor: "#e8e8e2" }}>
+        <div className="fixed z-50 shadow-2xl flex flex-col overflow-hidden border bottom-0 right-0 w-full h-full sm:bottom-20 sm:right-5 sm:w-[360px] sm:h-[480px] sm:rounded-2xl sm:max-h-[calc(100vh-7rem)]" style={{ background: "#fff", borderColor: "#e8e8e2" }}>
           {/* Header */}
           <div className="px-5 py-3.5 flex items-center gap-3 border-b" style={{ borderColor: "#e8e8e2" }}>
             <div className="w-9 h-9 rounded-lg flex items-center justify-center text-white text-sm font-bold" style={{ background: A }}>N</div>
