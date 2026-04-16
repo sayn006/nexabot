@@ -93,6 +93,7 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-7 text-[13px] font-medium" style={{ color: T }}>
             <a href="#services" className="hover:text-[var(--text)] transition">Services</a>
             <a href="#expertises" className="hover:text-[var(--text)] transition">Expertises</a>
+            <a href="#signature" className="hover:text-[var(--text)] transition">Signature</a>
             <a href="#process" className="hover:text-[var(--text)] transition">Fonctionnement</a>
             <a href="#tarifs" className="hover:text-[var(--text)] transition">Tarifs</a>
             <a href="#faq" className="hover:text-[var(--text)] transition">FAQ</a>
@@ -506,6 +507,47 @@ export default function Home() {
               </ScrollReveal>
             ))}
           </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Signature Électronique */}
+      <section id="signature" className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Nouveau service</p>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
+                Signature électronique professionnelle
+              </h2>
+              <p className="mt-4 text-sm max-w-xl mx-auto leading-relaxed" style={{ color: T }}>
+                Faites signer vos documents en ligne en toute sécurité. Contrats, devis, bons de commande — envoyez, signez et archivez en quelques clics.
+              </p>
+            </div>
+          </ScrollReveal>
+          <StaggerContainer className="grid md:grid-cols-3 gap-5 mb-10">
+            {[
+              { emoji: "✍️", title: "Signature légale", desc: "Signature électronique conforme eIDAS. Valeur juridique identique à une signature manuscrite." },
+              { emoji: "📧", title: "Envoi par email", desc: "Votre client reçoit un lien sécurisé, signe depuis son téléphone ou son ordinateur. Simple et rapide." },
+              { emoji: "🔒", title: "Sécurisé & archivé", desc: "Documents chiffrés, horodatés et archivés. Traçabilité complète de chaque signature." },
+            ].map((card) => (
+              <ScrollReveal key={card.title} variant="scale">
+                <div className="card-hover border rounded-2xl p-7 transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
+                  <span className="text-3xl mb-4 block">{card.emoji}</span>
+                  <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{card.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: T }}>{card.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </StaggerContainer>
+          <ScrollReveal variant="scale">
+            <div className="border rounded-2xl p-8 sm:p-10 text-center" style={{ borderColor: A, background: "var(--surface)" }}>
+              <div className="text-4xl sm:text-5xl font-bold mb-2" style={{ fontFamily: F, color: A }}>3€ par signature</div>
+              <p className="text-sm mb-6" style={{ color: T }}>Sans abonnement. Payez uniquement ce que vous utilisez.</p>
+              <a href="#contact" className="inline-flex text-white font-semibold px-7 py-3.5 rounded-xl text-sm transition hover:opacity-90 hover:shadow-lg" style={{ background: A }}>
+                Essayer gratuitement
+              </a>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
