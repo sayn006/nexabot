@@ -11,7 +11,7 @@ interface Msg {
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([
-    { role: "assistant", content: "Bonjour ! 👋 Je suis l'assistant NexaBot. Comment puis-je vous aider ? Je peux vous renseigner sur nos chatbots IA, nos tarifs ou organiser une démo gratuite." },
+    { role: "assistant", content: "Bonjour ! 👋 Je suis l'assistant emcorp. Comment puis-je vous aider ? Je peux vous renseigner sur nos chatbots IA, nos tarifs ou organiser une démo gratuite." },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ export default function ChatWidget() {
       const data = await res.json();
       setMsgs((p) => [...p, { role: "assistant", content: data.reply || "Désolé, une erreur est survenue." }]);
     } catch {
-      setMsgs((p) => [...p, { role: "assistant", content: "Désolé, contactez-nous à contact@nexabot.io" }]);
+      setMsgs((p) => [...p, { role: "assistant", content: "Désolé, contactez-nous à contact@emcorp.io" }]);
     } finally {
       setLoading(false);
     }
@@ -63,9 +63,9 @@ export default function ChatWidget() {
         <div className="fixed z-50 shadow-2xl flex flex-col overflow-hidden border bottom-0 right-0 w-full h-full sm:bottom-20 sm:right-5 sm:w-[360px] sm:h-[480px] sm:rounded-2xl sm:max-h-[calc(100vh-7rem)]" style={{ background: "#fff", borderColor: "#e8e8e2" }}>
           {/* Header */}
           <div className="px-5 py-3.5 flex items-center gap-3 border-b" style={{ borderColor: "#e8e8e2" }}>
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center text-white text-sm font-bold" style={{ background: A }}>N</div>
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center text-white text-sm font-bold" style={{ background: A }}>E</div>
             <div className="flex-1">
-              <p className="font-semibold text-sm text-gray-900" style={{ fontFamily: "var(--font-display)" }}>NexaBot</p>
+              <p className="font-semibold text-sm text-gray-900" style={{ fontFamily: "var(--font-display)" }}>emcorp</p>
               <p className="text-xs text-gray-400 flex items-center gap-1">
                 <span className="w-1.5 h-1.5 bg-green-400 rounded-full" /> En ligne
               </p>
@@ -131,7 +131,7 @@ export default function ChatWidget() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg>
               </button>
             </div>
-            <p className="text-center text-[10px] text-gray-400 mt-2">Propulsé par NexaBot</p>
+            <p className="text-center text-[10px] text-gray-400 mt-2">Propulsé par emcorp</p>
           </div>
         </div>
       )}

@@ -18,9 +18,9 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: A }}>
-              <span className="text-white text-xs font-bold">N</span>
+              <span className="text-white text-xs font-bold">E</span>
             </div>
-            <span className="font-bold tracking-tight" style={{ fontFamily: F }}>nexabot</span>
+            <span className="font-bold tracking-tight" style={{ fontFamily: F }}>emcorp</span>
           </div>
           <div className="hidden md:flex items-center gap-7 text-[13px] font-medium" style={{ color: T }}>
             <a href="#services" className="hover:text-[var(--text)] transition">Services</a>
@@ -477,14 +477,14 @@ export default function Home() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs" style={{ color: TL }}>
           <div className="flex items-center gap-2">
             <div className="w-5 h-5 rounded flex items-center justify-center" style={{ background: A }}>
-              <span className="text-white text-[10px] font-bold">N</span>
+              <span className="text-white text-[10px] font-bold">E</span>
             </div>
-            <span className="font-semibold" style={{ color: "var(--text)", fontFamily: F }}>nexabot</span>
+            <span className="font-semibold" style={{ color: "var(--text)", fontFamily: F }}>emcorp</span>
           </div>
           <div className="flex gap-5">
             <a href="mailto:contact@emcorp.io" className="hover:text-[var(--text)] transition">contact@emcorp.io</a>
           </div>
-          <span>© 2026 NexaBot — Propulsé par emcorp.io</span>
+          <span>© 2026 emcorp.io — Agence IA & Développement</span>
         </div>
       </footer>
 

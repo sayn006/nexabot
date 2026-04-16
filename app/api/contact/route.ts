@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
     const htmlContent = `
       <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-        <h2 style="color:#0dca7a">Nouveau message — NexaBot</h2>
+        <h2 style="color:#0dca7a">Nouveau message — emcorp.io</h2>
         <table style="width:100%;border-collapse:collapse">
           <tr><td style="padding:8px 0;font-weight:bold;color:#555">Nom</td><td style="padding:8px 0">${name}</td></tr>
           <tr><td style="padding:8px 0;font-weight:bold;color:#555">Email</td><td style="padding:8px 0"><a href="mailto:${email}">${email}</a></td></tr>
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
         <hr style="border:none;border-top:1px solid #eee;margin:16px 0"/>
         <p style="white-space:pre-wrap;color:#333">${message}</p>
         <hr style="border:none;border-top:1px solid #eee;margin:16px 0"/>
-        <p style="font-size:12px;color:#999">Envoyé depuis nexabot.io</p>
+        <p style="font-size:12px;color:#999">Envoyé depuis emcorp.io</p>
       </div>
     `;
 
@@ -56,10 +56,10 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "NexaBot <noreply@emcorp.io>",
+        from: "emcorp.io <noreply@emcorp.io>",
         to: [CONTACT_EMAIL],
         reply_to: email,
-        subject: `[NexaBot] Message de ${name}${company ? ` — ${company}` : ""}`,
+        subject: `[emcorp] Message de ${name}${company ? ` — ${company}` : ""}`,
         html: htmlContent,
       }),
     });

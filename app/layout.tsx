@@ -15,8 +15,8 @@ const body = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "NexaBot — Agence IA | Chatbots & Automatisation",
-  description: "Automatisez votre business avec l'IA. Chatbots, agents vocaux, automatisation pour PME.",
+  title: "emcorp.io — Agence IA | Chatbots & Automatisation",
+  description: "Automatisez votre business avec l'IA. Chatbots, agents vocaux, automatisation pour PME. emcorp.io",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
