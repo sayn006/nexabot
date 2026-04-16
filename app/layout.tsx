@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, DM_Sans } from "next/font/google";
 import "./globals.css";
+import CookieConsent from "./components/CookieConsent";
 
 const display = Space_Grotesk({
   variable: "--font-display",
@@ -16,7 +17,32 @@ const body = DM_Sans({
 
 export const metadata: Metadata = {
   title: "emcorp.io — Agence IA | Chatbots & Automatisation",
-  description: "Automatisez votre business avec l'IA. Chatbots, agents vocaux, automatisation pour PME. emcorp.io",
+  description:
+    "Agence IA specialisee dans les chatbots, agents vocaux et l'automatisation pour PME. Boostez votre productivite et votre relation client avec des solutions IA sur mesure. emcorp.io",
+  openGraph: {
+    title: "emcorp.io — Agence IA | Chatbots & Automatisation",
+    description:
+      "Agence IA specialisee dans les chatbots, agents vocaux et l'automatisation pour PME. Boostez votre productivite et votre relation client avec des solutions IA sur mesure.",
+    url: "https://emcorp.io",
+    siteName: "emcorp.io",
+    images: [
+      {
+        url: "/logo-icon-green.svg",
+        width: 44,
+        height: 51,
+        alt: "emcorp.io logo",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "emcorp.io — Agence IA | Chatbots & Automatisation",
+    description:
+      "Agence IA specialisee dans les chatbots, agents vocaux et l'automatisation pour PME.",
+  },
+  metadataBase: new URL("https://emcorp.io"),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -24,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" className={`${display.variable} ${body.variable}`}>
       <body style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}>
         {children}
+        <CookieConsent />
         <script
           dangerouslySetInnerHTML={{
             __html: `
