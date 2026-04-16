@@ -24,6 +24,7 @@ export default function Home() {
           </div>
           <div className="hidden md:flex items-center gap-7 text-[13px] font-medium" style={{ color: T }}>
             <a href="#services" className="hover:text-[var(--text)] transition">Services</a>
+            <a href="#realisations" className="hover:text-[var(--text)] transition">Réalisations</a>
             <a href="#process" className="hover:text-[var(--text)] transition">Fonctionnement</a>
             <a href="#tarifs" className="hover:text-[var(--text)] transition">Tarifs</a>
             <a href="#faq" className="hover:text-[var(--text)] transition">FAQ</a>
@@ -104,6 +105,39 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Credibility / Trust Stats */}
+      <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Qui sommes-nous</p>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
+                Une équipe expérimentée derrière chaque agent IA
+              </h2>
+              <p className="mt-4 text-sm max-w-lg mx-auto" style={{ color: T }}>
+                Nous combinons expertise technique et compréhension métier pour créer des solutions IA qui fonctionnent vraiment.
+              </p>
+            </div>
+          </ScrollReveal>
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { val: "10+", label: "Ans d'expérience", icon: "🏆" },
+              { val: "150+", label: "Projets livrés", icon: "🚀" },
+              { val: "80+", label: "Clients satisfaits", icon: "🤝" },
+              { val: "25+", label: "Experts mobilisés", icon: "👨‍💻" },
+            ].map((stat) => (
+              <ScrollReveal key={stat.label} variant="scale">
+                <div className="text-center p-6 border rounded-2xl transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
+                  <span className="text-2xl mb-3 block">{stat.icon}</span>
+                  <div className="text-4xl font-bold mb-1" style={{ fontFamily: F, color: A }}>{stat.val}</div>
+                  <div className="text-sm font-medium" style={{ color: T }}>{stat.label}</div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* Services */}
       <section id="services" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
@@ -137,6 +171,97 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Réalisations / Portfolio */}
+      <section id="realisations" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal variant="left">
+            <div className="max-w-xl mb-14">
+              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Réalisations</p>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
+                Des projets concrets, des résultats mesurables
+              </h2>
+              <p className="mt-3 text-sm" style={{ color: T }}>
+                Découvrez quelques-unes des solutions livrées par notre équipe.
+              </p>
+            </div>
+          </ScrollReveal>
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              {
+                name: "OSR Sécurité",
+                category: "Web + Mobile",
+                badge: "Sécurité",
+                emoji: "🛡️",
+                bg: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+                desc: "Application de sécurité connectée pour agents terrain. Suivi GPS en temps réel, gestion des rondes et alertes automatiques.",
+                tech: ["Flutter", "Symfony", "WebSocket", "Firebase"],
+              },
+              {
+                name: "TPR Transport",
+                category: "Web + Mobile",
+                badge: "Transport",
+                emoji: "🚛",
+                bg: "linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)",
+                desc: "Plateforme de gestion transport pour chauffeurs et dispatchers. Suivi de missions et planning des livraisons en temps réel.",
+                tech: ["Flutter", "Symfony", "GPS", "REST API"],
+              },
+              {
+                name: "GMAXX",
+                category: "Web",
+                badge: "Gestion",
+                emoji: "⏱️",
+                bg: "linear-gradient(135deg, #f97316 0%, #f59e0b 100%)",
+                desc: "Outil de gestion et time tracking pour équipes. Tableaux de bord analytiques et gestion de la facturation.",
+                tech: ["Symfony", "MySQL", "Chart.js"],
+              },
+              {
+                name: "Kerala Restaurant",
+                category: "Web + Mobile + Backoffice",
+                badge: "E-commerce",
+                emoji: "🍛",
+                bg: "linear-gradient(135deg, #ea580c 0%, #ef4444 100%)",
+                desc: "Solution complète pour restaurant : site vitrine avec commande en ligne, app mobile et backoffice admin.",
+                tech: ["Next.js", "Flutter", "Stripe", "Symfony"],
+              },
+              {
+                name: "Francilienne Distribution",
+                category: "Web B2B",
+                badge: "Distribution",
+                emoji: "📦",
+                bg: "linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)",
+                desc: "Plateforme B2B pour distributeur alimentaire. Gestion des commandes, stocks, livraisons et facturation.",
+                tech: ["Symfony", "MySQL", "PHP", "Bootstrap"],
+              },
+            ].map((project) => (
+              <ScrollReveal key={project.name} variant="scale">
+                <div className="card-hover group border rounded-2xl overflow-hidden transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
+                  {/* Colored header with emoji */}
+                  <div className="h-32 flex items-center justify-center relative" style={{ background: project.bg }}>
+                    <span className="text-5xl">{project.emoji}</span>
+                    <span className="absolute top-3 left-3 text-xs font-semibold text-white px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(8px)" }}>
+                      {project.badge}
+                    </span>
+                  </div>
+                  {/* Content */}
+                  <div className="p-6">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <h3 className="text-lg font-bold" style={{ fontFamily: F }}>{project.name}</h3>
+                      <span className="text-xs font-medium px-2 py-0.5 rounded-full shrink-0" style={{ background: "var(--bg-alt)", color: T }}>{project.category}</span>
+                    </div>
+                    <p className="text-sm leading-relaxed mb-4" style={{ color: T }}>{project.desc}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tech.map((t) => (
+                        <span key={t} className="px-2 py-0.5 rounded-md text-xs font-medium border" style={{ borderColor: B, color: T }}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* Process */}
       <section id="process" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
         <div className="max-w-5xl mx-auto">
@@ -161,6 +286,55 @@ export default function Home() {
                   </div>
                   <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{step.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: T }}>{step.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Valeurs / Why Us */}
+      <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Nos valeurs</p>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
+                Pourquoi nous choisir
+              </h2>
+              <p className="mt-3 text-sm max-w-lg mx-auto" style={{ color: T }}>
+                Chaque agent IA que nous créons repose sur ces 4 piliers fondamentaux.
+              </p>
+            </div>
+          </ScrollReveal>
+          <StaggerContainer className="grid sm:grid-cols-2 gap-5">
+            {[
+              {
+                emoji: "⚙️",
+                title: "Excellence technique",
+                desc: "Code propre, architecture solide, technologies de pointe. Nous ne livrons que du travail dont nous sommes fiers.",
+              },
+              {
+                emoji: "👂",
+                title: "Écoute client",
+                desc: "Chaque projet commence par une compréhension profonde de votre métier, vos contraintes et vos objectifs.",
+              },
+              {
+                emoji: "🧠",
+                title: "Innovation IA",
+                desc: "Nous restons à la pointe des modèles de langage et des frameworks d'automatisation pour vous offrir le meilleur.",
+              },
+              {
+                emoji: "🔥",
+                title: "Support réactif",
+                desc: "Un problème ? Une question ? Notre équipe répond en moins de 2h en jour ouvré. Pas de ticket sans réponse.",
+              },
+            ].map((v) => (
+              <ScrollReveal key={v.title} variant="scale">
+                <div className="card-hover border rounded-2xl p-7 transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
+                  <span className="text-3xl mb-4 block">{v.emoji}</span>
+                  <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{v.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: T }}>{v.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -241,6 +415,43 @@ export default function Home() {
               </ScrollReveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Trust / CTA Banner */}
+      <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal variant="scale">
+            <div className="relative rounded-3xl overflow-hidden px-8 py-16 sm:px-16 sm:py-20 text-center" style={{ background: "linear-gradient(135deg, #0dca7a 0%, #0ba968 50%, #099b5a 100%)" }}>
+              {/* Decorative circles */}
+              <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10" style={{ background: "white", transform: "translate(30%, -30%)" }} />
+              <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-10" style={{ background: "white", transform: "translate(-30%, 30%)" }} />
+              <div className="relative">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4" style={{ fontFamily: F }}>
+                  Rejoignez les entreprises qui automatisent avec nous
+                </h2>
+                <p className="text-white/80 max-w-lg mx-auto mb-8 text-sm leading-relaxed">
+                  Plus de 80 entreprises nous font confiance pour leurs agents IA. Pourquoi pas vous ?
+                </p>
+                <div className="flex flex-wrap justify-center gap-8 mb-10">
+                  {[
+                    { val: "150+", label: "Projets livrés" },
+                    { val: "99.9%", label: "Uptime garanti" },
+                    { val: "< 24h", label: "Temps de réponse" },
+                  ].map((s) => (
+                    <div key={s.label} className="text-center">
+                      <div className="text-2xl font-bold text-white" style={{ fontFamily: F }}>{s.val}</div>
+                      <div className="text-xs text-white/70">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+                <a href="#contact" className="inline-flex items-center gap-2 bg-white font-semibold px-8 py-3.5 rounded-xl text-sm transition hover:shadow-lg hover:opacity-95" style={{ color: "#0dca7a" }}>
+                  Demander une démo gratuite
+                  <span>→</span>
+                </a>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
