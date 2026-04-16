@@ -63,7 +63,7 @@ export default function ChatWidget() {
         <div className="fixed z-50 shadow-2xl flex flex-col overflow-hidden border bottom-0 right-0 w-full h-full sm:bottom-20 sm:right-5 sm:w-[360px] sm:h-[480px] sm:rounded-2xl sm:max-h-[calc(100vh-7rem)]" style={{ background: "#fff", borderColor: "#e8e8e2" }}>
           {/* Header */}
           <div className="px-5 py-3.5 flex items-center gap-3 border-b" style={{ borderColor: "#e8e8e2" }}>
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center text-white text-sm font-bold" style={{ background: A }}>E</div>
+            <img src="/logo-emcorp.jpg" alt="emcorp" className="w-9 h-9 rounded-lg object-contain" />
             <div className="flex-1">
               <p className="font-semibold text-sm text-gray-900" style={{ fontFamily: "var(--font-display)" }}>emcorp</p>
               <p className="text-xs text-gray-400 flex items-center gap-1">
