@@ -93,7 +93,7 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-7 text-[13px] font-medium" style={{ color: T }}>
             <a href="#services" className="hover:text-[var(--text)] transition">Services</a>
             <a href="#expertises" className="hover:text-[var(--text)] transition">Expertises</a>
-            <a href="#signature" className="hover:text-[var(--text)] transition">Signature</a>
+            <a href="/signature" className="hover:text-[var(--text)] transition">Signature</a>
             <a href="#process" className="hover:text-[var(--text)] transition">Fonctionnement</a>
             <a href="#tarifs" className="hover:text-[var(--text)] transition">Tarifs</a>
             <a href="#faq" className="hover:text-[var(--text)] transition">FAQ</a>
