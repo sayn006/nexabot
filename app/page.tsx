@@ -11,8 +11,78 @@ export default function Home() {
   const A = "var(--accent)";
   const B = "var(--border)";
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "emcorp.io",
+        "url": "https://emcorp.io",
+        "logo": "https://emcorp.io/logo-icon-green.svg",
+        "description": "Agence IA & Développement. Des agents IA qui répondent à vos clients, prennent des réservations et gèrent vos tâches répétitives. 24h/24, 7j/7.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "contact@emcorp.io",
+          "contactType": "customer service",
+          "availableLanguage": ["French", "English"]
+        }
+      },
+      {
+        "@type": "LocalBusiness",
+        "name": "emcorp.io",
+        "url": "https://emcorp.io",
+        "logo": "https://emcorp.io/logo-icon-green.svg",
+        "description": "Agence IA & Développement basée à Paris. Chatbots IA, agents vocaux, automatisations et solutions sur mesure pour entreprises.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Paris",
+          "addressCountry": "FR"
+        },
+        "email": "contact@emcorp.io",
+        "makesOffer": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Chatbot IA site web",
+              "description": "Assistant IA intégré à votre site qui répond en langage naturel, propose des produits et guide vos visiteurs."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Chatbot WhatsApp",
+              "description": "IA qui répond instantanément sur WhatsApp ou transfère à un humain si besoin."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Automatisations",
+              "description": "Relances automatiques, tri d'emails, sync CRM, notifications et workflows automatisés."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Agent vocal",
+              "description": "Assistant vocal qui décroche le téléphone, prend des RDV et répond aux questions."
+            }
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Navbar */}
       <nav className="sticky top-0 z-50 border-b" style={{ borderColor: B, background: "rgba(250,250,248,0.9)", backdropFilter: "blur(12px)" }}>
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
