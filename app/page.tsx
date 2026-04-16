@@ -17,7 +17,7 @@ export default function Home() {
       <nav className="sticky top-0 z-50 border-b" style={{ borderColor: B, background: "rgba(250,250,248,0.9)", backdropFilter: "blur(12px)" }}>
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <img src="/logo-emcorp.jpg" alt="emcorp" className="h-8 w-auto" />
+            <img src="/logo-icon-green.svg" alt="emcorp" className="h-7 w-auto" />
             <span className="font-bold tracking-tight" style={{ fontFamily: F }}>emcorp</span>
           </div>
           <div className="hidden md:flex items-center gap-7 text-[13px] font-medium" style={{ color: T }}>
@@ -474,7 +474,7 @@ export default function Home() {
       <footer className="border-t py-8 px-6" style={{ borderColor: B }}>
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs" style={{ color: TL }}>
           <div className="flex items-center gap-2">
-            <img src="/logo-emcorp.jpg" alt="emcorp" className="h-5 w-auto" />
+            <img src="/logo-icon-green.svg" alt="emcorp" className="h-5 w-auto" />
             <span className="font-semibold" style={{ color: "var(--text)", fontFamily: F }}>emcorp</span>
           </div>
           <div className="flex gap-5">
