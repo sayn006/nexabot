@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
             userId,
             stripeSubscriptionId: subscriptionId,
             stripePriceId: (sub as any).items.data[0].price.id,
-            plan: plan as "STARTER" | "BUSINESS" | "ENTERPRISE",
+            planType: plan as "STARTER" | "BUSINESS" | "ENTERPRISE",
             status: "ACTIVE",
             currentPeriodStart: new Date(((subData.current_period_start as number) || Date.now() / 1000) * 1000),
             currentPeriodEnd: new Date(((subData.current_period_end as number) || Date.now() / 1000) * 1000),

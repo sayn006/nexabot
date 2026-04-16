@@ -29,7 +29,7 @@ enum MessageRole {
   ASSISTANT
 }
 
-enum Plan {
+enum PlanType {
   STARTER
   BUSINESS
   ENTERPRISE
@@ -92,17 +92,57 @@ model Message {
   createdAt      DateTime     @default(now())
 }
 
+model Plan {
+  id                   String              @id @default(cuid())
+  name                 String
+  slug                 String              @unique
+  description          String?
+  priceMensuel         Float
+  priceAnnuel          Float?
+  features             Json                @default("[]")
+  active               Boolean             @default(true)
+  surDemande           Boolean             @default(false)
+  badgeText            String?
+  ordre                Int                 @default(0)
+  stripeProductId      String?
+  stripePriceIdMensuel String?
+  stripePriceIdAnnuel  String?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  subscriptions        Subscription[]
+  subscriptionTokens   SubscriptionToken[]
+}
+
 model Subscription {
   id                   String             @id @default(cuid())
   userId               String
   user                 User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   stripeSubscriptionId String             @unique
   stripePriceId        String
-  plan                 Plan
+  planType             PlanType
+  planId               String?
+  customPlan           Plan?              @relation(fields: [planId], references: [id])
   status               SubscriptionStatus @default(ACTIVE)
+  frequence            String             @default("mensuel")
+  email                String?
+  nomComplet           String?
+  societe              String?
   currentPeriodStart   DateTime
   currentPeriodEnd     DateTime
   createdAt            DateTime           @default(now())
+}
+
+model SubscriptionToken {
+  id        String   @id @default(cuid())
+  token     String   @unique @default(cuid())
+  planId    String
+  userId    String?
+  email     String?
+  frequence String   @default("mensuel")
+  used      Boolean  @default(false)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  plan      Plan     @relation(fields: [planId], references: [id])
 }
 
 model Lead {

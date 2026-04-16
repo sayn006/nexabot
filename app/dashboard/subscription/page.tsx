@@ -24,7 +24,7 @@ export default async function SubscriptionPage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <div>
-            <p className="font-bold">Plan {subscription.plan} actif</p>
+            <p className="font-bold">Plan {subscription.planType} actif</p>
             <p className="text-sm">
               Renouvellement le {new Date(subscription.currentPeriodEnd).toLocaleDateString("fr-FR")}
             </p>
@@ -35,7 +35,7 @@ export default async function SubscriptionPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {(Object.entries(PLANS) as [string, typeof PLANS[keyof typeof PLANS]][]).map(([key, plan]) => {
-          const isCurrent = subscription?.plan === key;
+          const isCurrent = subscription?.planType === key;
           return (
             <div
               key={key}

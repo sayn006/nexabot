@@ -76,7 +76,7 @@ export default async function DashboardPage() {
           </div>
           <div className="stat-title">Abonnement</div>
           <div className="stat-value text-sm">
-            {subscription ? subscription.plan : "Aucun"}
+            {subscription ? subscription.planType : "Aucun"}
           </div>
           <div className="stat-desc">
             {subscription ? "Actif" : "Pas d'abonnement actif"}
