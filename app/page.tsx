@@ -92,7 +92,7 @@ export default function Home() {
           </div>
           <div className="hidden md:flex items-center gap-7 text-[13px] font-medium" style={{ color: T }}>
             <a href="#services" className="hover:text-[var(--text)] transition">Services</a>
-            <a href="#realisations" className="hover:text-[var(--text)] transition">Réalisations</a>
+            <a href="#expertises" className="hover:text-[var(--text)] transition">Expertises</a>
             <a href="#process" className="hover:text-[var(--text)] transition">Fonctionnement</a>
             <a href="#tarifs" className="hover:text-[var(--text)] transition">Tarifs</a>
             <a href="#faq" className="hover:text-[var(--text)] transition">FAQ</a>
@@ -232,97 +232,6 @@ export default function Home() {
                   </div>
                   <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{s.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: T }}>{s.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* Réalisations / Portfolio */}
-      <section id="realisations" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal variant="left">
-            <div className="max-w-xl mb-14">
-              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Réalisations</p>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
-                Des projets concrets, des résultats mesurables
-              </h2>
-              <p className="mt-3 text-sm" style={{ color: T }}>
-                Découvrez quelques-unes des solutions livrées par notre équipe.
-              </p>
-            </div>
-          </ScrollReveal>
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              {
-                name: "Kerala Restaurant Indien",
-                category: "App Mobile + Site Web",
-                badge: "Restauration",
-                emoji: "🍛",
-                bg: "linear-gradient(135deg, #ea580c 0%, #ef4444 100%)",
-                desc: "Application mobile et site internet de commande en ligne pour restaurant. Les clients parcourent le menu, passent commande et paient directement depuis leur téléphone ou le site web. Backoffice complet pour la gestion du menu, des commandes et des réservations.",
-                tech: ["Next.js", "Flutter", "Symfony", "Stripe", "Coolify"],
-              },
-              {
-                name: "OSR Sécurité",
-                category: "Web + Mobile",
-                badge: "Sécurité",
-                emoji: "🛡️",
-                bg: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
-                desc: "Outil de gestion métier complet pour société de sécurité. Gestion des clients, des sites, des agents, du matériel et planification CRM. Interface interne pour piloter l'ensemble de l'activité au quotidien.",
-                tech: ["Flutter", "Symfony", "WebSocket", "Firebase", "MySQL"],
-              },
-              {
-                name: "TPR Transport",
-                category: "App Mobile + Outils Web",
-                badge: "Transport",
-                emoji: "🚛",
-                bg: "linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)",
-                desc: "Application mobile et outils de gestion pour entreprise de transport. Création de devis, gestion des contrats, facturation et suivi des missions. Un outil métier complet pour gérer l'activité de A à Z.",
-                tech: ["Flutter", "Symfony", "GPS", "MySQL", "REST API"],
-              },
-              {
-                name: "GMAXX",
-                category: "Web",
-                badge: "BTP",
-                emoji: "🏗️",
-                bg: "linear-gradient(135deg, #f97316 0%, #f59e0b 100%)",
-                desc: "Outil de gestion BTP complet. Bons de commande, suivi d'avancement des travaux, factures de situation, gestion des documents, suivi des chantiers et tableau de bord analytique pour piloter l'activité.",
-                tech: ["Symfony", "MySQL", "Chart.js", "REST API", "Hostinger"],
-              },
-              {
-                name: "Francilienne Distribution",
-                category: "App Mobile + Site de commande",
-                badge: "Distribution",
-                emoji: "📦",
-                bg: "linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)",
-                desc: "Site de commande B2B et application mobile pour distributeur alimentaire. Les clients professionnels passent leurs commandes en ligne, suivent leurs livraisons et gèrent leur historique. Back-office complet pour l'équipe interne.",
-                tech: ["Symfony", "Flutter", "MySQL", "PHP", "Bootstrap"],
-              },
-            ].map((project) => (
-              <ScrollReveal key={project.name} variant="scale">
-                <div className="card-hover group border rounded-2xl overflow-hidden transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
-                  {/* Colored header with emoji */}
-                  <div className="h-32 flex items-center justify-center relative" style={{ background: project.bg }}>
-                    <span className="text-5xl">{project.emoji}</span>
-                    <span className="absolute top-3 left-3 text-xs font-semibold text-white px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(8px)" }}>
-                      {project.badge}
-                    </span>
-                  </div>
-                  {/* Content */}
-                  <div className="p-6">
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <h3 className="text-lg font-bold" style={{ fontFamily: F }}>{project.name}</h3>
-                      <span className="text-xs font-medium px-2 py-0.5 rounded-full shrink-0" style={{ background: "var(--bg-alt)", color: T }}>{project.category}</span>
-                    </div>
-                    <p className="text-sm leading-relaxed mb-4" style={{ color: T }}>{project.desc}</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tech.map((t) => (
-                        <span key={t} className="px-2 py-0.5 rounded-md text-xs font-medium border" style={{ borderColor: B, color: T }}>{t}</span>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </ScrollReveal>
             ))}
@@ -483,6 +392,120 @@ export default function Home() {
               </ScrollReveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Visual Divider — Chapter transition */}
+      <div className="relative py-2">
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 30%, var(--bg) 70%, var(--bg-alt) 100%)" }} />
+        <div className="relative max-w-xs mx-auto flex items-center gap-4 py-6">
+          <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, transparent, ${B})` }} />
+          <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: TL }}>Et aussi</span>
+          <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, ${B}, transparent)` }} />
+        </div>
+      </div>
+
+      {/* Nos autres expertises — Transition */}
+      <section className="py-20 px-6" style={{ background: "var(--bg-alt)" }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <ScrollReveal>
+            <p className="text-sm font-semibold mb-2" style={{ color: A }}>Au-delà de l&apos;IA</p>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
+              Une agence tech complète à votre service
+            </h2>
+            <p className="mt-4 text-sm max-w-lg mx-auto leading-relaxed" style={{ color: T }}>
+              En plus de nos solutions IA, nous concevons des applications web et mobiles sur mesure pour digitaliser votre activité.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Portfolio / Realisations */}
+      <section id="expertises" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal variant="left">
+            <div className="max-w-xl mb-14">
+              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Réalisations</p>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
+                Des projets livrés, des clients satisfaits
+              </h2>
+              <p className="mt-3 text-sm" style={{ color: T }}>
+                Découvrez quelques-unes des solutions livrées par notre équipe.
+              </p>
+            </div>
+          </ScrollReveal>
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              {
+                name: "Kerala Restaurant Indien",
+                category: "App Mobile + Site Web",
+                badge: "Restauration",
+                emoji: "🍛",
+                bg: "linear-gradient(135deg, #ea580c 0%, #ef4444 100%)",
+                desc: "Application mobile et site internet de commande en ligne pour restaurant. Les clients parcourent le menu, passent commande et paient directement depuis leur téléphone ou le site web. Backoffice complet pour la gestion du menu, des commandes et des réservations.",
+                tech: ["Next.js", "Flutter", "Symfony", "Stripe", "Coolify"],
+              },
+              {
+                name: "OSR Sécurité",
+                category: "Web + Mobile",
+                badge: "Sécurité",
+                emoji: "🛡️",
+                bg: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+                desc: "Outil de gestion métier complet pour société de sécurité. Gestion des clients, des sites, des agents, du matériel et planification CRM. Interface interne pour piloter l'ensemble de l'activité au quotidien.",
+                tech: ["Flutter", "Symfony", "WebSocket", "Firebase", "MySQL"],
+              },
+              {
+                name: "TPR Transport",
+                category: "App Mobile + Outils Web",
+                badge: "Transport",
+                emoji: "🚛",
+                bg: "linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)",
+                desc: "Application mobile et outils de gestion pour entreprise de transport. Création de devis, gestion des contrats, facturation et suivi des missions. Un outil métier complet pour gérer l'activité de A à Z.",
+                tech: ["Flutter", "Symfony", "GPS", "MySQL", "REST API"],
+              },
+              {
+                name: "GMAXX",
+                category: "Web",
+                badge: "BTP",
+                emoji: "🏗️",
+                bg: "linear-gradient(135deg, #f97316 0%, #f59e0b 100%)",
+                desc: "Outil de gestion BTP complet. Bons de commande, suivi d'avancement des travaux, factures de situation, gestion des documents, suivi des chantiers et tableau de bord analytique pour piloter l'activité.",
+                tech: ["Symfony", "MySQL", "Chart.js", "REST API", "Hostinger"],
+              },
+              {
+                name: "Francilienne Distribution",
+                category: "App Mobile + Site de commande",
+                badge: "Distribution",
+                emoji: "📦",
+                bg: "linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)",
+                desc: "Site de commande B2B et application mobile pour distributeur alimentaire. Les clients professionnels passent leurs commandes en ligne, suivent leurs livraisons et gèrent leur historique. Back-office complet pour l'équipe interne.",
+                tech: ["Symfony", "Flutter", "MySQL", "PHP", "Bootstrap"],
+              },
+            ].map((project) => (
+              <ScrollReveal key={project.name} variant="scale">
+                <div className="card-hover group border rounded-2xl overflow-hidden transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
+                  <div className="h-32 flex items-center justify-center relative" style={{ background: project.bg }}>
+                    <span className="text-5xl">{project.emoji}</span>
+                    <span className="absolute top-3 left-3 text-xs font-semibold text-white px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(8px)" }}>
+                      {project.badge}
+                    </span>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <h3 className="text-lg font-bold" style={{ fontFamily: F }}>{project.name}</h3>
+                      <span className="text-xs font-medium px-2 py-0.5 rounded-full shrink-0" style={{ background: "var(--bg-alt)", color: T }}>{project.category}</span>
+                    </div>
+                    <p className="text-sm leading-relaxed mb-4" style={{ color: T }}>{project.desc}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tech.map((t) => (
+                        <span key={t} className="px-2 py-0.5 rounded-md text-xs font-medium border" style={{ borderColor: B, color: T }}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </StaggerContainer>
         </div>
       </section>
 

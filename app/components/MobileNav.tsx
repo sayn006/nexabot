@@ -8,6 +8,7 @@ export default function MobileNav() {
 
   const links = [
     { href: "#services", label: "Services" },
+    { href: "#expertises", label: "Expertises" },
     { href: "#process", label: "Fonctionnement" },
     { href: "#tarifs", label: "Tarifs" },
     { href: "#faq", label: "FAQ" },
