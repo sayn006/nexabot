@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function AdminSettingsPage() {
   const [docusealKey, setDocusealKey] = useState("");
+  const [docusealUrl, setDocusealUrl] = useState("https://sign.cashloose.com");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -13,21 +14,30 @@ export default function AdminSettingsPage() {
       .then((r) => r.json())
       .then((data) => {
         if (data.DOCUSEAL_API_KEY) setDocusealKey(data.DOCUSEAL_API_KEY);
+        if (data.DOCUSEAL_URL) setDocusealUrl(data.DOCUSEAL_URL);
       })
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
 
+  const saveSetting = async (key: string, value: string) => {
+    const res = await fetch("/api/admin/settings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ key, value }),
+    });
+    return res.ok;
+  };
+
   const save = async () => {
     setSaving(true);
     setSaved(false);
     try {
-      const res = await fetch("/api/admin/settings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ key: "DOCUSEAL_API_KEY", value: docusealKey }),
-      });
-      if (res.ok) setSaved(true);
+      const results = await Promise.all([
+        saveSetting("DOCUSEAL_API_KEY", docusealKey),
+        saveSetting("DOCUSEAL_URL", docusealUrl),
+      ]);
+      if (results.every(Boolean)) setSaved(true);
     } catch (err) {
       console.error(err);
     } finally {
@@ -71,6 +81,24 @@ export default function AdminSettingsPage() {
             <label className="label">
               <span className="label-text-alt text-base-content/50">
                 Disponible sur docuseal.com ou votre instance auto-hebergee.
+              </span>
+            </label>
+          </div>
+
+          <div className="form-control mt-2">
+            <label className="label">
+              <span className="label-text font-semibold">URL DocuSeal</span>
+            </label>
+            <input
+              type="url"
+              placeholder="https://sign.cashloose.com"
+              value={docusealUrl}
+              onChange={(e) => setDocusealUrl(e.target.value)}
+              className="input input-bordered w-full"
+            />
+            <label className="label">
+              <span className="label-text-alt text-base-content/50">
+                URL de votre instance DocuSeal auto-hebergee. Par defaut : https://sign.cashloose.com
               </span>
             </label>
           </div>

@@ -170,6 +170,7 @@ model SignatureRequest {
   status               String   @default("DRAFT")
   stripePaymentId      String?
   docusealSubmissionId String?
+  templateId           String?
   price                Float    @default(3.0)
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt

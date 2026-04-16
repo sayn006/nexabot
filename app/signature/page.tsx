@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
+import { DocusealBuilder } from "@docuseal/react";
 
 const F = "var(--font-display)";
 const T = "var(--text-sub)";
@@ -14,6 +15,12 @@ interface Signer {
   email: string;
 }
 
+const STEP_LABELS = [
+  "Preparer le document",
+  "Ajouter les signataires",
+  "Payer et envoyer",
+];
+
 export default function SignaturePage() {
   const [step, setStep] = useState(1);
   const [file, setFile] = useState<File | null>(null);
@@ -24,6 +31,21 @@ export default function SignaturePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [dragOver, setDragOver] = useState(false);
+
+  // DocuSeal state
+  const [docusealConfigured, setDocusealConfigured] = useState<boolean | null>(null);
+  const [templateId, setTemplateId] = useState<string | null>(null);
+  const [builderToken, setBuilderToken] = useState<string | null>(null);
+  const [docusealUrl, setDocusealUrl] = useState("https://sign.cashloose.com");
+  const [builderReady, setBuilderReady] = useState(false);
+
+  // Check if DocuSeal is configured
+  useEffect(() => {
+    fetch("/api/signature/config")
+      .then((r) => r.json())
+      .then((data) => setDocusealConfigured(data.configured))
+      .catch(() => setDocusealConfigured(false));
+  }, []);
 
   const handleFileSelect = useCallback((selectedFile: File) => {
     if (!selectedFile.name.toLowerCase().endsWith(".pdf")) {
@@ -55,12 +77,27 @@ export default function SignaturePage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Erreur upload");
       setUploadedPath(data.filePath);
-      setStep(2);
+      setTemplateId(data.templateId || null);
+      setBuilderToken(data.builderToken || null);
+      if (data.docusealUrl) setDocusealUrl(data.docusealUrl);
+
+      if (data.builderToken) {
+        // Show the builder for field placement
+        setBuilderReady(true);
+      } else {
+        // No builder token — skip to signers step
+        setStep(2);
+      }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Erreur lors de l'upload");
     } finally {
       setUploading(false);
     }
+  };
+
+  const handleBuilderSave = () => {
+    // User finished placing fields, move to signers step
+    setStep(2);
   };
 
   const addSigner = () => setSigners([...signers, { name: "", email: "" }]);
@@ -102,6 +139,7 @@ export default function SignaturePage() {
           email: clientEmail,
           documentName: file?.name || "document.pdf",
           documentUrl: uploadedPath,
+          templateId: templateId,
           signers: signers.map((s) => ({ name: s.name.trim(), email: s.email.trim() })),
         }),
       });
@@ -125,32 +163,74 @@ export default function SignaturePage() {
     }
   };
 
+  // Derive the host for DocusealBuilder from the URL (strip protocol)
+  const docusealHost = docusealUrl.replace(/^https?:\/\//, "");
+
+  // Unconfigured state
+  if (docusealConfigured === false) {
+    return (
+      <>
+        <NavBar />
+        <main className="min-h-screen px-6 py-16">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="mb-8">
+              <p className="text-sm font-semibold mb-2" style={{ color: A }}>
+                Signature electronique
+              </p>
+              <h1
+                className="text-3xl sm:text-4xl font-bold tracking-tight"
+                style={{ fontFamily: F }}
+              >
+                Faites signer vos documents
+              </h1>
+            </div>
+            <div
+              className="border rounded-2xl p-12"
+              style={{ borderColor: B, background: "var(--surface)" }}
+            >
+              <div className="text-5xl mb-4" style={{ color: TL }}>&#9888;</div>
+              <h2 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>
+                Service en cours de configuration
+              </h2>
+              <p className="text-sm" style={{ color: T }}>
+                Veuillez nous contacter pour utiliser ce service.
+              </p>
+              <a
+                href="mailto:contact@emcorp.io"
+                className="inline-block mt-6 px-6 py-3 rounded-xl text-sm font-semibold text-white transition hover:opacity-90"
+                style={{ background: A }}
+              >
+                Nous contacter
+              </a>
+            </div>
+          </div>
+        </main>
+        <PageFooter />
+      </>
+    );
+  }
+
+  // Loading state
+  if (docusealConfigured === null) {
+    return (
+      <>
+        <NavBar />
+        <main className="min-h-screen px-6 py-16">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="text-sm" style={{ color: T }}>Chargement...</div>
+          </div>
+        </main>
+        <PageFooter />
+      </>
+    );
+  }
+
   return (
     <>
-      {/* Navbar */}
-      <nav
-        className="sticky top-0 z-50 border-b"
-        style={{ borderColor: B, background: "rgba(250,250,248,0.9)", backdropFilter: "blur(12px)" }}
-      >
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <img src="/logo-icon-green.svg" alt="emcorp" className="h-7 w-auto" />
-            <span className="font-bold tracking-tight" style={{ fontFamily: F }}>
-              emcorp
-            </span>
-          </Link>
-          <Link
-            href="/"
-            className="text-sm font-medium transition hover:opacity-80"
-            style={{ color: T }}
-          >
-            Retour au site
-          </Link>
-        </div>
-      </nav>
+      <NavBar />
 
       <main className="min-h-screen px-6 py-16">
-        <div className="max-w-2xl mx-auto">
+        <div className={step === 1 && builderReady ? "max-w-6xl mx-auto" : "max-w-2xl mx-auto"}>
           {/* Header */}
           <div className="text-center mb-12">
             <p className="text-sm font-semibold mb-2" style={{ color: A }}>
@@ -163,7 +243,7 @@ export default function SignaturePage() {
               Faites signer vos documents
             </h1>
             <p className="mt-3 text-sm" style={{ color: T }}>
-              Uploadez, ajoutez vos signataires, payez 3EUR et c&apos;est parti.
+              Uploadez, placez les champs de signature, ajoutez vos signataires, payez 3&euro; et c&apos;est parti.
             </p>
           </div>
 
@@ -171,19 +251,27 @@ export default function SignaturePage() {
           <div className="flex items-center justify-center gap-2 mb-12">
             {[1, 2, 3].map((s) => (
               <div key={s} className="flex items-center gap-2">
-                <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all"
-                  style={{
-                    background: step >= s ? A : "var(--bg-alt)",
-                    color: step >= s ? "white" : TL,
-                    fontFamily: F,
-                  }}
-                >
-                  {s}
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all"
+                    style={{
+                      background: step >= s ? A : "var(--bg-alt)",
+                      color: step >= s ? "white" : TL,
+                      fontFamily: F,
+                    }}
+                  >
+                    {s}
+                  </div>
+                  <span
+                    className="hidden sm:inline text-xs font-medium"
+                    style={{ color: step >= s ? "var(--text)" : TL }}
+                  >
+                    {STEP_LABELS[s - 1]}
+                  </span>
                 </div>
                 {s < 3 && (
                   <div
-                    className="w-12 sm:w-20 h-0.5 rounded"
+                    className="w-8 sm:w-16 h-0.5 rounded"
                     style={{ background: step > s ? A : "var(--border)" }}
                   />
                 )}
@@ -201,8 +289,8 @@ export default function SignaturePage() {
             </div>
           )}
 
-          {/* Step 1: Upload */}
-          {step === 1 && (
+          {/* Step 1: Upload + Builder */}
+          {step === 1 && !builderReady && (
             <div className="border rounded-2xl p-8" style={{ borderColor: B, background: "var(--surface)" }}>
               <h2 className="text-lg font-bold mb-1" style={{ fontFamily: F }}>
                 1. Uploadez votre document
@@ -269,6 +357,63 @@ export default function SignaturePage() {
             </div>
           )}
 
+          {/* Step 1b: DocuSeal Builder - Field placement */}
+          {step === 1 && builderReady && builderToken && (
+            <div className="border rounded-2xl overflow-hidden" style={{ borderColor: B, background: "var(--surface)" }}>
+              <div className="p-6 border-b" style={{ borderColor: B }}>
+                <h2 className="text-lg font-bold mb-1" style={{ fontFamily: F }}>
+                  1. Placez les champs de signature
+                </h2>
+                <p className="text-sm" style={{ color: T }}>
+                  Glissez-deposez les champs (signature, date, texte...) sur votre document.
+                  Cliquez sur &laquo; Continuer &raquo; quand vous avez termine.
+                </p>
+              </div>
+
+              <div style={{ minHeight: "700px" }}>
+                <DocusealBuilder
+                  token={builderToken}
+                  host={docusealHost}
+                  language="fr"
+                  withSendButton={false}
+                  withSignYourselfButton={false}
+                  withUploadButton={false}
+                  withTitle={false}
+                  autosave={true}
+                  onSave={handleBuilderSave}
+                  backgroundColor="#fafaf8"
+                  style={{ width: "100%", minHeight: "700px" }}
+                />
+              </div>
+
+              <div className="p-6 border-t" style={{ borderColor: B }}>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => {
+                      setBuilderReady(false);
+                      setBuilderToken(null);
+                      setTemplateId(null);
+                      setFile(null);
+                      setUploadedPath("");
+                      setError("");
+                    }}
+                    className="flex-1 py-3 rounded-xl text-sm font-semibold border transition hover:bg-[var(--bg-alt)]"
+                    style={{ borderColor: B, color: T }}
+                  >
+                    Recommencer
+                  </button>
+                  <button
+                    onClick={() => setStep(2)}
+                    className="flex-1 py-3 rounded-xl text-sm font-semibold text-white transition hover:opacity-90"
+                    style={{ background: A }}
+                  >
+                    Continuer
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Step 2: Signers */}
           {step === 2 && (
             <div className="border rounded-2xl p-8" style={{ borderColor: B, background: "var(--surface)" }}>
@@ -330,7 +475,11 @@ export default function SignaturePage() {
 
               <div className="flex gap-3 mt-8">
                 <button
-                  onClick={() => { setStep(1); setError(""); }}
+                  onClick={() => {
+                    setStep(1);
+                    setError("");
+                    if (builderToken) setBuilderReady(true);
+                  }}
                   className="flex-1 py-3 rounded-xl text-sm font-semibold border transition hover:bg-[var(--bg-alt)]"
                   style={{ borderColor: B, color: T }}
                 >
@@ -436,24 +585,54 @@ export default function SignaturePage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t py-8 px-6" style={{ borderColor: B }}>
-        <div
-          className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs"
-          style={{ color: TL }}
-        >
-          <div className="flex items-center gap-2">
-            <img src="/logo-icon-green.svg" alt="emcorp" className="h-5 w-auto" />
-            <span className="font-semibold" style={{ color: "var(--text)", fontFamily: F }}>
-              emcorp
-            </span>
-          </div>
-          <a href="mailto:contact@emcorp.io" className="hover:text-[var(--text)] transition">
-            contact@emcorp.io
-          </a>
-          <span>&copy; 2026 emcorp.io</span>
-        </div>
-      </footer>
+      <PageFooter />
     </>
+  );
+}
+
+function NavBar() {
+  return (
+    <nav
+      className="sticky top-0 z-50 border-b"
+      style={{ borderColor: B, background: "rgba(250,250,248,0.9)", backdropFilter: "blur(12px)" }}
+    >
+      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2.5">
+          <img src="/logo-icon-green.svg" alt="emcorp" className="h-7 w-auto" />
+          <span className="font-bold tracking-tight" style={{ fontFamily: F }}>
+            emcorp
+          </span>
+        </Link>
+        <Link
+          href="/"
+          className="text-sm font-medium transition hover:opacity-80"
+          style={{ color: T }}
+        >
+          Retour au site
+        </Link>
+      </div>
+    </nav>
+  );
+}
+
+function PageFooter() {
+  return (
+    <footer className="border-t py-8 px-6" style={{ borderColor: B }}>
+      <div
+        className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs"
+        style={{ color: TL }}
+      >
+        <div className="flex items-center gap-2">
+          <img src="/logo-icon-green.svg" alt="emcorp" className="h-5 w-auto" />
+          <span className="font-semibold" style={{ color: "var(--text)", fontFamily: F }}>
+            emcorp
+          </span>
+        </div>
+        <a href="mailto:contact@emcorp.io" className="hover:text-[var(--text)] transition">
+          contact@emcorp.io
+        </a>
+        <span>&copy; 2026 emcorp.io</span>
+      </div>
+    </footer>
   );
 }

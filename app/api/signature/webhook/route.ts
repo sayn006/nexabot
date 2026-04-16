@@ -2,15 +2,28 @@ import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
 
-async function getDocuSealApiKey(): Promise<string | null> {
-  // Check DB first, then fallback to env var
+async function getDocuSealConfig(): Promise<{ apiKey: string | null; url: string }> {
+  let apiKey: string | null = null;
+  let url = "https://sign.cashloose.com";
+
   try {
-    const setting = await prisma.setting.findUnique({ where: { key: "DOCUSEAL_API_KEY" } });
-    if (setting?.value) return setting.value;
+    const settings = await prisma.setting.findMany({
+      where: { key: { in: ["DOCUSEAL_API_KEY", "DOCUSEAL_URL"] } },
+    });
+    for (const s of settings) {
+      if (s.key === "DOCUSEAL_API_KEY" && s.value) apiKey = s.value;
+      if (s.key === "DOCUSEAL_URL" && s.value) url = s.value;
+    }
   } catch {
-    // Setting table may not exist yet, ignore
+    // Setting table may not exist yet
   }
-  return process.env.DOCUSEAL_API_KEY || null;
+
+  if (!apiKey) apiKey = process.env.DOCUSEAL_API_KEY || null;
+  if (!url || url === "https://sign.cashloose.com") {
+    url = process.env.DOCUSEAL_URL || "https://sign.cashloose.com";
+  }
+
+  return { apiKey, url };
 }
 
 async function sendToDocuSeal(signatureRequest: {
@@ -18,25 +31,30 @@ async function sendToDocuSeal(signatureRequest: {
   documentUrl: string | null;
   signers: unknown;
   documentName: string;
+  templateId: string | null;
 }) {
-  const apiKey = await getDocuSealApiKey();
+  const { apiKey, url: docusealUrl } = await getDocuSealConfig();
   if (!apiKey) {
     console.log("[DocuSeal] No API key configured — skipping DocuSeal integration");
     return null;
   }
 
+  if (!signatureRequest.templateId) {
+    console.log("[DocuSeal] No templateId on signature request — skipping");
+    return null;
+  }
+
   try {
-    const baseUrl = process.env.DOCUSEAL_API_URL || "https://api.docuseal.com";
     const signers = signatureRequest.signers as Array<{ name: string; email: string }>;
 
-    const response = await fetch(`${baseUrl}/submissions`, {
+    const response = await fetch(`${docusealUrl}/api/submissions`, {
       method: "POST",
       headers: {
         "X-Auth-Token": apiKey,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        template_id: process.env.DOCUSEAL_TEMPLATE_ID,
+        template_id: parseInt(signatureRequest.templateId),
         send_email: true,
         submitters: signers.map((s, i) => ({
           name: s.name,
