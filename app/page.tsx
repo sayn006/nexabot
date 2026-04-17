@@ -406,18 +406,38 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Nos autres expertises — Transition */}
-      <section className="py-20 px-6" style={{ background: "var(--bg-alt)" }}>
-        <div className="max-w-3xl mx-auto text-center">
-          <ScrollReveal>
-            <p className="text-sm font-semibold mb-2" style={{ color: A }}>Au-delà de l&apos;IA</p>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
-              Une agence tech complète à votre service
-            </h2>
-            <p className="mt-4 text-sm max-w-lg mx-auto leading-relaxed" style={{ color: T }}>
-              En plus de nos solutions IA, nous concevons des applications web et mobiles sur mesure pour digitaliser votre activité.
-            </p>
+      {/* Prestations dev — Au-delà de l'IA */}
+      <section id="dev-services" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal variant="left">
+            <div className="max-w-xl mb-14">
+              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Au-delà de l&apos;IA</p>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
+                Une agence tech complète à votre service
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed" style={{ color: T }}>
+                Sites web, outils métier, apps mobiles, intégrations — on construit aussi tout ce qui digitalise votre activité.
+              </p>
+            </div>
           </ScrollReveal>
+          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { emoji: "🌐", title: "Création de site internet", desc: "Sites vitrine, landing pages, e-commerce. Design moderne, responsive, optimisé SEO et performances." },
+              { emoji: "🛠️", title: "Outils web sur mesure", desc: "Back-offices, espaces clients, dashboards, CRM internes. Le SaaS interne taillé à votre métier." },
+              { emoji: "📱", title: "Applications mobiles", desc: "Apps iOS et Android en Flutter. Code partagé, déploiement App Store et Play Store gérés." },
+              { emoji: "♻️", title: "Refonte & migration", desc: "Vous avez un site daté ou un outil legacy ? On modernise sans rupture, en gardant vos données et vos URLs." },
+              { emoji: "🔌", title: "Intégrations & API", desc: "Stripe, Resend, CRM, ERP, comptabilité, n8n, webhooks. On connecte vos outils entre eux." },
+              { emoji: "🛡️", title: "Hébergement & maintenance", desc: "Infra Coolify, monitoring temps réel, sauvegardes, mises à jour sécurité. Vous codez, on garde tout en ligne." },
+            ].map((s) => (
+              <ScrollReveal key={s.title} variant="scale">
+                <div className="card-hover group border rounded-2xl p-7 transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
+                  <span className="text-3xl mb-4 block">{s.emoji}</span>
+                  <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{s.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: T }}>{s.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </StaggerContainer>
         </div>
       </section>
 
