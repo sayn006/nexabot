@@ -30,6 +30,32 @@ export default function CheckoutTokenPage({
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
   const [error, setError] = useState("");
+  const [regenerating, setRegenerating] = useState(false);
+  const [regeneratedEmail, setRegeneratedEmail] = useState<string | null>(null);
+
+  async function requestNewLink() {
+    setRegenerating(true);
+    try {
+      const res = await fetch(`${EMCORP_API}/checkout/subscription/regenerate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
+      const body = await res.json().catch(() => null);
+      if (!res.ok) {
+        const msg = (body as { error?: string } | null)?.error ?? "Impossible de regénérer le lien.";
+        setError(msg);
+        return;
+      }
+      const email = (body as { email?: string } | null)?.email ?? null;
+      setRegeneratedEmail(email);
+    } catch (e) {
+      console.error(e);
+      setError("Impossible de contacter le serveur. Réessayez dans un instant.");
+    } finally {
+      setRegenerating(false);
+    }
+  }
 
   useEffect(() => {
     // Retour de Stripe : on n'enchaîne pas une nouvelle session
@@ -96,14 +122,69 @@ export default function CheckoutTokenPage({
     );
   }
 
-  if (error) {
+  if (regeneratedEmail) {
     return (
       <StatusCard
-        icon="error"
-        title="Lien invalide"
-        message={error}
-        cta={{ href: "/", label: "Retour à l'accueil", variant: "btn-ghost" }}
+        icon="success"
+        title="Nouveau lien demandé"
+        message={`Un nouveau lien de paiement va vous être envoyé par email à ${regeneratedEmail}. Pensez à vérifier vos spams.`}
+        cta={{ href: "/", label: "Retour à l'accueil", variant: "btn-primary" }}
       />
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-base-200">
+        <div className="card bg-base-100 shadow-xl max-w-md w-full mx-4">
+          <div className="card-body text-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-16 w-16 text-error mx-auto"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <h1
+              className="text-2xl font-bold mt-4"
+              style={{ fontFamily: "var(--font-display), system-ui, sans-serif" }}
+            >
+              Lien invalide ou expiré
+            </h1>
+            <p className="text-base-content/60 mt-2">{error}</p>
+            <p className="text-base-content/60 text-sm mt-2">
+              Pas d&apos;inquiétude, vous pouvez demander un nouveau lien en un clic, nous vous l&apos;enverrons par email.
+            </p>
+            <div className="mt-6 flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={requestNewLink}
+                disabled={regenerating}
+                className="btn btn-primary"
+              >
+                {regenerating ? (
+                  <>
+                    <span className="loading loading-spinner loading-sm" />
+                    Envoi en cours…
+                  </>
+                ) : (
+                  "Demander un nouveau lien"
+                )}
+              </button>
+              <a href="/" className="btn btn-ghost">
+                Retour à l&apos;accueil
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 
