@@ -10,6 +10,7 @@ export default function MobileNav() {
     { href: "#services", label: "Services" },
     { href: "#expertises", label: "Expertises" },
     { href: "/signature", label: "Signature" },
+    { href: "/facturation-electronique", label: "Facturation élec." },
     { href: "#process", label: "Fonctionnement" },
     { href: "#tarifs", label: "Tarifs" },
     { href: "#faq", label: "FAQ" },
