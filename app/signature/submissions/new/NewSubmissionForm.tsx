@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useState } from "react";
 
 import { createSubmissionAction, type NewSubmissionState } from "./actions";
@@ -35,7 +36,30 @@ export default function NewSubmissionForm() {
 
   return (
     <form action={formAction} className="space-y-6">
-      {state?.error && (
+      {state?.quotaExceeded ? (
+        <div
+          role="alert"
+          className="p-4 rounded-lg text-sm font-medium"
+          style={{
+            background: "rgba(245,158,11,0.12)",
+            border: "1px solid rgba(245,158,11,0.35)",
+            color: "#92400e",
+          }}
+        >
+          <p className="font-bold mb-1">Quota mensuel depasse</p>
+          <p className="mb-3">
+            Vous avez atteint la limite de votre plan. Upgrade vers le plan
+            superieur pour continuer a creer des demandes.
+          </p>
+          <Link
+            href="/signature/billing"
+            className="inline-block px-4 py-2 rounded-lg text-xs font-semibold text-white transition hover:opacity-90"
+            style={{ background: A }}
+          >
+            Voir les plans
+          </Link>
+        </div>
+      ) : state?.error ? (
         <div
           role="alert"
           className="p-3 rounded-lg text-sm font-medium text-red-700"
@@ -43,7 +67,7 @@ export default function NewSubmissionForm() {
         >
           {state.error}
         </div>
-      )}
+      ) : null}
 
       <div>
         <label htmlFor="documentName" className="block text-sm font-semibold mb-2">

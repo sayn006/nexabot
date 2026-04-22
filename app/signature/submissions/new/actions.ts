@@ -9,6 +9,7 @@ import { cookies } from "next/headers";
 export interface NewSubmissionState {
   error?: string;
   fieldErrors?: Record<string, string>;
+  quotaExceeded?: boolean;
 }
 
 function apiBase(): string {
@@ -72,6 +73,16 @@ export async function createSubmissionAction(
 
     if (res.ok) {
       created = (await res.json()) as SignatureSubmission;
+    } else if (res.status === 402) {
+      const text = await res.text();
+      let message = "Quota mensuel depasse. Upgrade vers le plan superieur.";
+      try {
+        const p = JSON.parse(text);
+        if (typeof p?.message === "string") message = p.message;
+      } catch {
+        // ignore
+      }
+      return { error: message, quotaExceeded: true };
     } else if (res.status !== 415 && res.status !== 400) {
       const text = await res.text();
       let message = `Erreur API ${res.status}`;
@@ -104,6 +115,13 @@ export async function createSubmissionAction(
       });
     } catch (err) {
       if (err instanceof SignatureApiError) {
+        if (err.status === 402) {
+          return {
+            error:
+              "Quota mensuel depasse. Upgrade vers le plan superieur.",
+            quotaExceeded: true,
+          };
+        }
         return { error: err.message };
       }
       return { error: "Impossible de creer la demande." };
