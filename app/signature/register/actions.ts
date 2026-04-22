@@ -28,7 +28,7 @@ export async function registerAction(
   try {
     const data = await publicApiFetch<SignatureAuthResponse>(
       "/api/signature/register",
-      { method: "POST", body: { email, password, name } }
+      { method: "POST", body: { email, password, raison_sociale: name } }
     );
 
     if (!data?.token) {
