@@ -2,6 +2,11 @@ import Link from "next/link";
 
 import { apiFetch, SignatureApiError } from "@/lib/signature/api";
 import { requireSignatureUser } from "@/lib/signature/auth";
+import {
+  fetchBillingData,
+  planLabel,
+  statusLabel,
+} from "@/lib/signature/billing";
 import type { SignatureSubmission } from "@/lib/signature/types";
 
 import ProtectedShell from "../components/ProtectedShell";
@@ -40,7 +45,14 @@ async function fetchSubmissions(): Promise<SignatureSubmission[]> {
 
 export default async function DashboardPage() {
   const user = await requireSignatureUser();
-  const submissions = await fetchSubmissions();
+  const [submissions, billing] = await Promise.all([
+    fetchSubmissions(),
+    fetchBillingData(),
+  ]);
+  const subscription = billing.data?.subscription ?? null;
+  const currentPlan = subscription?.plan ?? null;
+  const subStatus = statusLabel(subscription?.status ?? null);
+  const unlimited = currentPlan === "illimite";
 
   const F = "var(--font-display)";
   const T = "var(--text-sub)";
@@ -73,6 +85,71 @@ export default async function DashboardPage() {
         <p className="mt-2 text-sm" style={{ color: T }}>
           Suivez vos demandes de signature en un coup d&apos;oeil.
         </p>
+      </div>
+
+      <div
+        className="border rounded-2xl p-5 mb-6 flex flex-wrap items-center justify-between gap-4"
+        style={{ borderColor: B, background: "var(--surface)" }}
+      >
+        <div className="flex items-center gap-4">
+          <div>
+            <p
+              className="text-xs font-semibold uppercase tracking-wider"
+              style={{ color: TL }}
+            >
+              Plan
+            </p>
+            <p
+              className="text-lg font-bold"
+              style={{ fontFamily: F }}
+            >
+              {planLabel(currentPlan)}
+            </p>
+          </div>
+          {currentPlan && (
+            <span
+              className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold"
+              style={{ color: subStatus.color, background: subStatus.bg }}
+            >
+              {subStatus.label}
+            </span>
+          )}
+        </div>
+
+        {currentPlan ? (
+          <div className="flex items-center gap-4">
+            <div className="text-right">
+              <p
+                className="text-xs font-semibold uppercase tracking-wider"
+                style={{ color: TL }}
+              >
+                Signatures ce mois
+              </p>
+              <p className="font-semibold">
+                {subscription
+                  ? unlimited
+                    ? `${subscription.signaturesUsed} / illimite`
+                    : `${subscription.signaturesUsed} / ${subscription.signaturesQuota}`
+                  : "—"}
+              </p>
+            </div>
+            <Link
+              href="/signature/billing"
+              className="text-sm font-semibold hover:opacity-80 transition"
+              style={{ color: A }}
+            >
+              Gerer
+            </Link>
+          </div>
+        ) : (
+          <Link
+            href="/signature/billing"
+            className="px-4 py-2 rounded-xl text-sm font-semibold text-white transition hover:opacity-90"
+            style={{ background: A }}
+          >
+            Choisir un plan
+          </Link>
+        )}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
