@@ -9,7 +9,9 @@ function getApiBase(): string {
   const base =
     process.env.EMCORP_API_URL ||
     process.env.NEXT_PUBLIC_EMCORP_API ||
-    "http://127.0.0.1:8002";
+    (process.env.NODE_ENV === "production"
+      ? "https://app.emcorp.io"
+      : "http://127.0.0.1:8002");
   return base.replace(/\/+$/, "");
 }
 
