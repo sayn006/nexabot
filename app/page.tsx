@@ -282,7 +282,7 @@ export default function Home() {
   const clientLogos = [
     { name: "TPR Transport", sector: "Transport & logistique" },
     { name: "Kerala Restaurant", sector: "Restauration" },
-    { name: "Gmaxx", sector: "Services" },
+    { name: "Gmaxx", sector: "BTP" },
     { name: "OSR Sécurité", sector: "Sécurité privée" },
     { name: "HK Entreprise", sector: "BTP" },
     { name: "La Francilienne de Distribution", sector: "Distribution" },
