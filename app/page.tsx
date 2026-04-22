@@ -375,20 +375,6 @@ export default function Home() {
     { name: "La Francilienne de Distribution", sector: "Distribution" },
   ];
 
-  // Testimonials (placeholders)
-  const testimonials = [
-    {
-      quote: "Depuis l'installation du chatbot, on gère 3x plus de commandes sans embaucher. Le SAV tourne même la nuit.",
-      name: "Marc D.",
-      role: "Gérant, restaurant indien",
-    },
-    {
-      quote: "Signature électronique conforme, intégration rapide. Nos clients signent leurs devis en 2 minutes depuis leur téléphone.",
-      name: "Sophie L.",
-      role: "Directrice, cabinet de conseil",
-    },
-  ];
-
   return (
     <>
       <script
@@ -609,20 +595,6 @@ export default function Home() {
                 >
                   <div className="font-semibold text-sm leading-tight">{c.name}</div>
                   <div className="text-[11px] mt-1" style={{ color: TL }}>{c.sector}</div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </StaggerContainer>
-          <StaggerContainer className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-            {testimonials.map((t) => (
-              <ScrollReveal key={t.name} variant="scale">
-                <div className="border rounded-2xl p-7 h-full flex flex-col" style={{ borderColor: B, background: "var(--surface)" }}>
-                  <div className="text-3xl leading-none mb-3" style={{ color: A, fontFamily: F }}>&ldquo;</div>
-                  <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: T }}>{t.quote}</p>
-                  <div className="pt-4" style={{ borderTop: `1px solid ${B}` }}>
-                    <div className="font-semibold text-sm" style={{ fontFamily: F }}>{t.name}</div>
-                    <div className="text-xs" style={{ color: TL }}>{t.role}</div>
-                  </div>
                 </div>
               </ScrollReveal>
             ))}
