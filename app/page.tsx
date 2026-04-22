@@ -19,7 +19,7 @@ export default function Home() {
         "name": "emcorp.io",
         "url": "https://emcorp.io",
         "logo": "https://emcorp.io/logo-icon-green.svg",
-        "description": "Agence IA & Développement. Des agents IA qui répondent à vos clients, prennent des réservations et gèrent vos tâches répétitives. 24h/24, 7j/7.",
+        "description": "Agence IA & Développement. Chatbot IA, signature électronique eIDAS et facturation électronique 2026.",
         "contactPoint": {
           "@type": "ContactPoint",
           "email": "contact@emcorp.io",
@@ -32,7 +32,7 @@ export default function Home() {
         "name": "emcorp.io",
         "url": "https://emcorp.io",
         "logo": "https://emcorp.io/logo-icon-green.svg",
-        "description": "Agence IA & Développement basée à Paris. Chatbots IA, agents vocaux, automatisations et solutions sur mesure pour entreprises.",
+        "description": "Agence IA & Développement basée à Paris. Chatbot IA, signature électronique et facturation électronique conforme DGFiP.",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Paris",
@@ -44,38 +44,255 @@ export default function Home() {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Chatbot IA site web",
-              "description": "Assistant IA intégré à votre site qui répond en langage naturel, propose des produits et guide vos visiteurs."
+              "name": "Chatbot IA",
+              "description": "Assistant IA 24/7 pour restaurants, e-commerce et PME."
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Chatbot WhatsApp",
-              "description": "IA qui répond instantanément sur WhatsApp ou transfère à un humain si besoin."
+              "name": "Signature électronique",
+              "description": "Signature en ligne certifiée eIDAS, conforme."
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Automatisations",
-              "description": "Relances automatiques, tri d'emails, sync CRM, notifications et workflows automatisés."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Agent vocal",
-              "description": "Assistant vocal qui décroche le téléphone, prend des RDV et répond aux questions."
+              "name": "Facturation électronique",
+              "description": "Mise en conformité 2026 via PDP agréée DGFiP."
             }
           }
         ]
       }
     ]
   };
+
+  // Icônes inline (équivalents Lucide : MessageCircle, FileSignature, FileText)
+  const IconMessageCircle = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+    </svg>
+  );
+  const IconFileSignature = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+      <path d="M14 2v6h6" />
+      <path d="M8 18h1" />
+      <path d="M11 18c.667 0 2-.667 2-2s-1.333-2-2-2-2 .667-2 2" />
+      <path d="M16 18c1.333-1 2-2 2-3" />
+    </svg>
+  );
+  const IconFileText = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+      <path d="M14 2v6h6" />
+      <path d="M8 13h8" />
+      <path d="M8 17h8" />
+      <path d="M8 9h2" />
+    </svg>
+  );
+
+  // Produits phares
+  const products = [
+    {
+      id: "chatbot",
+      Icon: IconMessageCircle,
+      title: "Chatbot IA",
+      desc: "Automatisez votre SAV 24/7 avec des agents IA personnalisés pour restaurants, e-commerce et PME.",
+      anchor: "#tarifs-chatbot",
+    },
+    {
+      id: "signature",
+      Icon: IconFileSignature,
+      title: "Signature électronique",
+      desc: "Signez vos contrats, devis et bons de commande en ligne. Certifié eIDAS, valeur juridique conforme.",
+      anchor: "#tarifs-signature",
+    },
+    {
+      id: "facturation",
+      Icon: IconFileText,
+      title: "Facturation électronique",
+      desc: "Mise en conformité 2026 clé en main via notre PDP partenaire IOPOLE, agréée DGFiP.",
+      anchor: "#tarifs-facturation",
+    },
+  ];
+
+  // Tarifs Chatbot IA
+  const chatbotPlans = [
+    {
+      name: "Starter",
+      price: "77€",
+      sub: "/mois",
+      setup: "Setup : 500€",
+      desc: "Un chatbot pour démarrer",
+      features: [
+        "Chatbot IA sur votre site",
+        "Widget aux couleurs de votre marque",
+        "Rapport email des conversations",
+        "Support email",
+        "Utilisateurs illimités",
+      ],
+      pop: false,
+    },
+    {
+      name: "Business",
+      price: "150€",
+      sub: "/mois",
+      setup: "Setup : 2 000€",
+      desc: "Pour aller plus loin",
+      features: [
+        "Tout Starter +",
+        "Chatbot WhatsApp intégré",
+        "Automatisations workflows",
+        "Connexion catalogue / CRM",
+        "Dashboard analytics",
+        "Support prioritaire",
+      ],
+      pop: true,
+    },
+    {
+      name: "Enterprise",
+      price: "Sur devis",
+      sub: "",
+      setup: "",
+      desc: "Solution sur mesure",
+      features: [
+        "Tout Business +",
+        "Agent vocal téléphone",
+        "Multi-canaux",
+        "Instance dédiée",
+        "SLA garanti",
+        "Accompagnement dédié",
+      ],
+      pop: false,
+    },
+  ];
+
+  // Tarifs Signature électronique
+  const signaturePlans = [
+    {
+      name: "À l'unité",
+      price: "3€",
+      sub: "/signature",
+      setup: "Sans abonnement",
+      desc: "Payez ce que vous signez",
+      features: [
+        "Signature conforme eIDAS",
+        "Envoi par email sécurisé",
+        "Horodatage & traçabilité",
+        "Archivage légal inclus",
+        "Idéal ponctuel",
+      ],
+      pop: false,
+    },
+    {
+      name: "Pack 50",
+      price: "99€",
+      sub: "/pack",
+      setup: "Validité 12 mois",
+      desc: "Pour un volume régulier",
+      features: [
+        "50 signatures incluses (1,98€/signature)",
+        "Multi-signataires illimités",
+        "Modèles de documents",
+        "Relances automatiques",
+        "Support prioritaire",
+      ],
+      pop: true,
+    },
+    {
+      name: "Illimité",
+      price: "49€",
+      sub: "/mois",
+      setup: "Sans engagement",
+      desc: "Signatures sans limite",
+      features: [
+        "Signatures illimitées",
+        "API & intégrations",
+        "Workflows personnalisés",
+        "Branding complet",
+        "SLA & support dédié",
+      ],
+      pop: false,
+    },
+  ];
+
+  // Tarifs Facturation électronique (repris depuis /facturation-electronique)
+  const facturationPlans = [
+    {
+      name: "Essentiel",
+      price: "19€",
+      sub: "/mois",
+      setup: "Setup offert",
+      desc: "TPE et auto-entrepreneurs (< 50 factures/mois)",
+      features: [
+        "Jusqu'à 50 factures émises/mois",
+        "Réception illimitée fournisseurs",
+        "Formats Factur-X, UBL, CII",
+        "E-reporting TVA automatisé",
+        "Archivage légal 10 ans (NF 461)",
+        "Support email sous 48h",
+      ],
+      pop: false,
+    },
+    {
+      name: "Pro",
+      price: "49€",
+      sub: "/mois",
+      setup: "Setup : 250€",
+      desc: "PME jusqu'à 500 factures/mois",
+      features: [
+        "Jusqu'à 500 factures émises/mois",
+        "Connecteurs Sage, EBP, Pennylane, Cegid",
+        "API pour intégration ERP",
+        "Signature électronique incluse",
+        "Dashboard analytique (DSO, retards)",
+        "Support prioritaire sous 24h",
+      ],
+      pop: true,
+    },
+    {
+      name: "Business",
+      price: "149€",
+      sub: "/mois",
+      setup: "Setup : sur devis",
+      desc: "ETI et volumes importants",
+      features: [
+        "Volume illimité de factures",
+        "API dédiée haute disponibilité",
+        "Multi-sociétés, multi-SIRET",
+        "Intégration ERP complexe (SAP, Odoo)",
+        "SLA 99,9% garanti",
+        "Support téléphonique 7j/7",
+      ],
+      pop: false,
+    },
+  ];
+
+  const pricingGroups = [
+    { id: "tarifs-chatbot", label: "Chatbot IA", note: "Utilisateurs illimités sur tous les plans.", plans: chatbotPlans },
+    { id: "tarifs-signature", label: "Signature électronique", note: "Conforme eIDAS. Valeur juridique identique à une signature manuscrite.", plans: signaturePlans },
+    { id: "tarifs-facturation", label: "Facturation électronique", note: "PDP agréée DGFiP. Certifications ISO 27001 & NF 461.", plans: facturationPlans },
+  ];
+
+  // Logos clients (placeholders — Sayn remplacera)
+  const clientLogos = ["Client A", "Client B", "Client C", "Client D", "Client E", "Client F"];
+
+  // Testimonials (placeholders)
+  const testimonials = [
+    {
+      quote: "Depuis l'installation du chatbot, on gère 3x plus de commandes sans embaucher. Le SAV tourne même la nuit.",
+      name: "Marc D.",
+      role: "Gérant, restaurant indien",
+    },
+    {
+      quote: "Signature électronique conforme, intégration rapide. Nos clients signent leurs devis en 2 minutes depuis leur téléphone.",
+      name: "Sophie L.",
+      role: "Directrice, cabinet de conseil",
+    },
+  ];
 
   return (
     <>
@@ -91,8 +308,7 @@ export default function Home() {
             <span className="font-bold tracking-tight" style={{ fontFamily: F }}>emcorp</span>
           </div>
           <div className="hidden md:flex items-center gap-7 text-[13px] font-medium" style={{ color: T }}>
-            <a href="#services" className="hover:text-[var(--text)] transition">Services</a>
-            <a href="#expertises" className="hover:text-[var(--text)] transition">Expertises</a>
+            <a href="#produits" className="hover:text-[var(--text)] transition">Produits</a>
             <a href="/signature" className="hover:text-[var(--text)] transition">Signature</a>
             <a href="/facturation-electronique" className="hover:text-[var(--text)] transition">Facturation élec.</a>
             <a href="#process" className="hover:text-[var(--text)] transition">Fonctionnement</a>
@@ -106,13 +322,13 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero */}
+      {/* 1. Hero */}
       <section className="relative pt-24 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <ScrollReveal>
             <div className="inline-flex items-center gap-2 border rounded-full px-4 py-1.5 text-[13px] font-medium mb-8" style={{ borderColor: B, color: T }}>
               <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: A }} />
-              Nouveau : Agents IA pour restaurants & e-commerce
+              Chatbot IA · Signature · Facturation électronique 2026
             </div>
           </ScrollReveal>
           <ScrollReveal delay={150}>
@@ -129,10 +345,10 @@ export default function Home() {
           <ScrollReveal delay={450}>
             <div className="flex flex-wrap justify-center gap-3 mt-10">
               <a href="#contact" className="text-white font-semibold px-7 py-3.5 rounded-xl text-sm transition hover:opacity-90 hover:shadow-lg" style={{ background: A }}>
-                Démarrer — c&apos;est gratuit
+                Démo gratuite
               </a>
-              <a href="#services" className="font-medium px-7 py-3.5 rounded-xl text-sm border transition hover:bg-[var(--bg-alt)]" style={{ borderColor: B, color: T }}>
-                Voir les services
+              <a href="#produits" className="font-medium px-7 py-3.5 rounded-xl text-sm border transition hover:bg-[var(--bg-alt)]" style={{ borderColor: B, color: T }}>
+                Voir nos produits
               </a>
             </div>
           </ScrollReveal>
@@ -157,7 +373,7 @@ export default function Home() {
         </StaggerContainer>
       </section>
 
-      {/* Marquee */}
+      {/* Marquee (conservé) */}
       <div className="border-y overflow-hidden py-4" style={{ borderColor: B }}>
         <div className="animate-marquee flex gap-12 whitespace-nowrap">
           {[...Array(2)].map((_, i) => (
@@ -175,32 +391,33 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Credibility / Trust Stats */}
-      <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
+      {/* 2. 3 Produits phares */}
+      <section id="produits" className="py-24 px-6">
+        <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-16">
-              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Qui sommes-nous</p>
+            <div className="text-center mb-14">
+              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Nos produits</p>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
-                Une équipe expérimentée derrière chaque agent IA
+                3 solutions clés pour digitaliser votre activité
               </h2>
-              <p className="mt-4 text-sm max-w-lg mx-auto" style={{ color: T }}>
-                Nous combinons expertise technique et compréhension métier pour créer des solutions IA qui fonctionnent vraiment.
+              <p className="mt-4 text-sm max-w-xl mx-auto leading-relaxed" style={{ color: T }}>
+                Des produits prêts à l&apos;emploi, pensés pour les restaurants, e-commerçants et PME françaises.
               </p>
             </div>
           </ScrollReveal>
-          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { val: "10+", label: "Ans d'expérience", icon: "🏆" },
-              { val: "150+", label: "Projets livrés", icon: "🚀" },
-              { val: "80+", label: "Clients satisfaits", icon: "🤝" },
-              { val: "25+", label: "Experts mobilisés", icon: "👨‍💻" },
-            ].map((stat) => (
-              <ScrollReveal key={stat.label} variant="scale">
-                <div className="text-center p-6 border rounded-2xl transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
-                  <span className="text-2xl mb-3 block">{stat.icon}</span>
-                  <div className="text-4xl font-bold mb-1" style={{ fontFamily: F, color: A }}>{stat.val}</div>
-                  <div className="text-sm font-medium" style={{ color: T }}>{stat.label}</div>
+          <StaggerContainer className="grid md:grid-cols-3 gap-5">
+            {products.map((p) => (
+              <ScrollReveal key={p.id} variant="scale">
+                <div className="card-hover group h-full flex flex-col border rounded-2xl p-7 transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5" style={{ background: "var(--accent-bg)", color: A }}>
+                    <p.Icon />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{p.title}</h3>
+                  <p className="text-sm leading-relaxed mb-6 flex-1" style={{ color: T }}>{p.desc}</p>
+                  <a href={p.anchor} className="inline-flex items-center gap-1.5 text-sm font-semibold transition hover:gap-2.5" style={{ color: A }}>
+                    En savoir plus
+                    <span aria-hidden="true">→</span>
+                  </a>
                 </div>
               </ScrollReveal>
             ))}
@@ -208,32 +425,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services */}
-      <section id="services" className="py-24 px-6">
+      {/* 3. Ils nous ont fait confiance */}
+      <section className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
         <div className="max-w-6xl mx-auto">
-          <ScrollReveal variant="left">
-            <div className="max-w-xl mb-14">
-              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Services</p>
+          <ScrollReveal>
+            <div className="text-center mb-12">
+              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Références</p>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
-                4 solutions pour automatiser votre activité
+                Ils nous ont fait confiance
               </h2>
             </div>
           </ScrollReveal>
-          <StaggerContainer className="grid md:grid-cols-2 gap-5">
-            {[
-              { emoji: "💬", title: "Chatbot site web", desc: "Un assistant intégré à votre site qui connaît votre activité par cœur. Il répond en langage naturel, propose des produits, guide vos visiteurs.", price: "à partir de 77€/mois" },
-              { emoji: "📱", title: "Chatbot WhatsApp", desc: "Vos clients vous écrivent sur WhatsApp ? L'IA répond instantanément ou transfère à un humain si besoin. Zéro message manqué.", price: "à partir de 97€/mois" },
-              { emoji: "🔄", title: "Automatisations", desc: "Relances automatiques, tri d'emails, sync CRM, notifications. Tout ce qui est répétitif, on l'automatise.", price: "à partir de 150€/mois" },
-              { emoji: "🎙️", title: "Agent vocal", desc: "Un assistant qui décroche le téléphone, prend des RDV et répond aux questions. Indiscernable d'un humain.", price: "sur devis" },
-            ].map((s) => (
-              <ScrollReveal key={s.title} variant="scale">
-                <div className="card-hover group border rounded-2xl p-7 transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
-                  <div className="flex items-start justify-between mb-4">
-                    <span className="text-3xl">{s.emoji}</span>
-                    <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ background: "var(--accent-bg)", color: A }}>{s.price}</span>
+          <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mb-16">
+            {clientLogos.map((name) => (
+              <ScrollReveal key={name} variant="scale">
+                <div
+                  className="h-20 flex items-center justify-center border rounded-xl text-sm font-semibold transition-all grayscale opacity-60 hover:grayscale-0 hover:opacity-100"
+                  style={{ borderColor: B, background: "var(--surface)", color: T, fontFamily: F }}
+                >
+                  {name}
+                </div>
+              </ScrollReveal>
+            ))}
+          </StaggerContainer>
+          <StaggerContainer className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+            {testimonials.map((t) => (
+              <ScrollReveal key={t.name} variant="scale">
+                <div className="border rounded-2xl p-7 h-full flex flex-col" style={{ borderColor: B, background: "var(--surface)" }}>
+                  <div className="text-3xl leading-none mb-3" style={{ color: A, fontFamily: F }}>&ldquo;</div>
+                  <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: T }}>{t.quote}</p>
+                  <div className="pt-4" style={{ borderTop: `1px solid ${B}` }}>
+                    <div className="font-semibold text-sm" style={{ fontFamily: F }}>{t.name}</div>
+                    <div className="text-xs" style={{ color: TL }}>{t.role}</div>
                   </div>
-                  <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{s.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: T }}>{s.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -241,8 +465,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Process */}
-      <section id="process" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
+      {/* 4. Comment ça marche */}
+      <section id="process" className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-16">
@@ -254,9 +478,9 @@ export default function Home() {
           </ScrollReveal>
           <StaggerContainer className="grid md:grid-cols-3 gap-8">
             {[
-              { n: "1", title: "On échange", desc: "Appelez-nous ou remplissez le formulaire. On comprend votre besoin en 15 minutes." },
-              { n: "2", title: "On configure", desc: "En 2-5 jours votre agent IA est prêt, entraîné avec vos données (menu, FAQ, catalogue)." },
-              { n: "3", title: "Ça tourne", desc: "Votre agent est en ligne 24/7. Vous recevez des rapports et pouvez ajuster à tout moment." },
+              { n: "1", title: "Audit", desc: "Appel de cadrage gratuit. On comprend votre besoin, vos outils existants et vos contraintes en 15 minutes." },
+              { n: "2", title: "Développement", desc: "En 2 à 5 jours, on configure votre solution : chatbot entraîné avec vos données, signature paramétrée, PDP connectée." },
+              { n: "3", title: "Déploiement & Support", desc: "Mise en ligne, formation de vos équipes, suivi continu. Support réactif sous 24h en jour ouvré." },
             ].map((step) => (
               <ScrollReveal key={step.n}>
                 <div className="text-center">
@@ -272,57 +496,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Valeurs / Why Us */}
-      <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Nos valeurs</p>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
-                Pourquoi nous choisir
-              </h2>
-              <p className="mt-3 text-sm max-w-lg mx-auto" style={{ color: T }}>
-                Chaque agent IA que nous créons repose sur ces 4 piliers fondamentaux.
-              </p>
-            </div>
-          </ScrollReveal>
-          <StaggerContainer className="grid sm:grid-cols-2 gap-5">
-            {[
-              {
-                emoji: "⚙️",
-                title: "Excellence technique",
-                desc: "Code propre, architecture solide, technologies de pointe. Nous ne livrons que du travail dont nous sommes fiers.",
-              },
-              {
-                emoji: "👂",
-                title: "Écoute client",
-                desc: "Chaque projet commence par une compréhension profonde de votre métier, vos contraintes et vos objectifs.",
-              },
-              {
-                emoji: "🧠",
-                title: "Innovation IA",
-                desc: "Nous restons à la pointe des modèles de langage et des frameworks d'automatisation pour vous offrir le meilleur.",
-              },
-              {
-                emoji: "🔥",
-                title: "Support réactif",
-                desc: "Un problème ? Une question ? Notre équipe répond en moins de 2h en jour ouvré. Pas de ticket sans réponse.",
-              },
-            ].map((v) => (
-              <ScrollReveal key={v.title} variant="scale">
-                <div className="card-hover border rounded-2xl p-7 transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
-                  <span className="text-3xl mb-4 block">{v.emoji}</span>
-                  <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{v.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: T }}>{v.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section id="tarifs" className="py-24 px-6">
+      {/* 5. Tarifs par produit */}
+      <section id="tarifs" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
@@ -330,47 +505,60 @@ export default function Home() {
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
                 Simple. Transparent. Sans engagement.
               </h2>
-              <p className="mt-3 text-sm" style={{ color: T }}>Utilisateurs illimités sur tous les plans.</p>
+              <p className="mt-3 text-sm" style={{ color: T }}>
+                3 produits, 3 grilles tarifaires. Choisissez celle qui correspond à votre besoin.
+              </p>
             </div>
           </ScrollReveal>
-          <StaggerContainer className="grid md:grid-cols-3 gap-5">
-            {[
-              { name: "Starter", price: "77€", sub: "/mois", setup: "Setup : 500€", desc: "Un chatbot pour démarrer", features: ["Chatbot IA sur votre site", "Widget aux couleurs de votre marque", "Rapport email des conversations", "Support email", "Utilisateurs illimités"], pop: false },
-              { name: "Business", price: "150€", sub: "/mois", setup: "Setup : 2 000€", desc: "Pour aller plus loin", features: ["Tout Starter +", "Chatbot WhatsApp intégré", "Automatisations workflows", "Connexion catalogue / CRM", "Dashboard analytics", "Support prioritaire"], pop: true },
-              { name: "Enterprise", price: "Sur devis", sub: "", setup: "", desc: "Solution sur mesure", features: ["Tout Business +", "Agent vocal téléphone", "Multi-canaux", "Instance dédiée", "SLA garanti", "Accompagnement dédié"], pop: false },
-            ].map((p) => (
-              <ScrollReveal key={p.name} variant="scale">
-                <div className={`card-hover border rounded-2xl p-7 relative ${p.pop ? "ring-2" : ""}`} style={{ borderColor: p.pop ? A : B, background: "var(--surface)" }}>
-                  {p.pop && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-white text-xs font-bold px-3 py-1 rounded-full" style={{ background: A }}>Recommandé</div>
-                  )}
-                  <h3 className="font-bold text-lg" style={{ fontFamily: F }}>{p.name}</h3>
-                  <p className="text-xs mt-1" style={{ color: TL }}>{p.desc}</p>
-                  <div className="mt-5 flex items-baseline gap-1">
-                    <span className="text-3xl font-bold" style={{ fontFamily: F }}>{p.price}</span>
-                    <span className="text-sm" style={{ color: TL }}>{p.sub}</span>
+
+          <div className="space-y-20">
+            {pricingGroups.map((group) => (
+              <div key={group.id} id={group.id} className="scroll-mt-24">
+                <ScrollReveal>
+                  <div className="text-center mb-10">
+                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ fontFamily: F }}>
+                      <span style={{ color: A }}>·</span> {group.label}
+                    </h3>
+                    <p className="mt-2 text-sm" style={{ color: TL }}>{group.note}</p>
                   </div>
-                  {p.setup && <p className="text-xs mt-1" style={{ color: TL }}>{p.setup}</p>}
-                  <a href="#contact" className={`block w-full text-center mt-6 py-2.5 rounded-lg text-sm font-semibold transition ${p.pop ? "text-white hover:opacity-90 hover:shadow-lg" : "border hover:bg-[var(--bg-alt)]"}`} style={p.pop ? { background: A } : { borderColor: B, color: T }}>
-                    {p.price === "Sur devis" ? "Nous contacter" : "Commencer"}
-                  </a>
-                  <ul className="mt-6 pt-5 space-y-2.5" style={{ borderTop: `1px solid ${B}` }}>
-                    {p.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2.5 text-sm" style={{ color: T }}>
-                        <span className="mt-1 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: A }} />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </ScrollReveal>
+                </ScrollReveal>
+                <StaggerContainer className="grid md:grid-cols-3 gap-5">
+                  {group.plans.map((p) => (
+                    <ScrollReveal key={`${group.id}-${p.name}`} variant="scale">
+                      <div className={`card-hover border rounded-2xl p-7 relative h-full flex flex-col ${p.pop ? "ring-2" : ""}`} style={{ borderColor: p.pop ? A : B, background: "var(--surface)" }}>
+                        {p.pop && (
+                          <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-white text-xs font-bold px-3 py-1 rounded-full" style={{ background: A }}>Recommandé</div>
+                        )}
+                        <h4 className="font-bold text-lg" style={{ fontFamily: F }}>{p.name}</h4>
+                        <p className="text-xs mt-1" style={{ color: TL }}>{p.desc}</p>
+                        <div className="mt-5 flex items-baseline gap-1">
+                          <span className="text-3xl font-bold" style={{ fontFamily: F }}>{p.price}</span>
+                          <span className="text-sm" style={{ color: TL }}>{p.sub}</span>
+                        </div>
+                        {p.setup && <p className="text-xs mt-1" style={{ color: TL }}>{p.setup}</p>}
+                        <a href="#contact" className={`block w-full text-center mt-6 py-2.5 rounded-lg text-sm font-semibold transition ${p.pop ? "text-white hover:opacity-90 hover:shadow-lg" : "border hover:bg-[var(--bg-alt)]"}`} style={p.pop ? { background: A } : { borderColor: B, color: T }}>
+                          {p.price === "Sur devis" ? "Nous contacter" : "Commencer"}
+                        </a>
+                        <ul className="mt-6 pt-5 space-y-2.5 flex-1" style={{ borderTop: `1px solid ${B}` }}>
+                          {p.features.map((f) => (
+                            <li key={f} className="flex items-start gap-2.5 text-sm" style={{ color: T }}>
+                              <span className="mt-1 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: A }} />
+                              {f}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </ScrollReveal>
+                  ))}
+                </StaggerContainer>
+              </div>
             ))}
-          </StaggerContainer>
+          </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
+      {/* 6. FAQ */}
+      <section id="faq" className="py-24 px-6">
         <div className="max-w-2xl mx-auto">
           <ScrollReveal>
             <h2 className="text-3xl font-bold mb-10 text-center" style={{ fontFamily: F }}>Questions fréquentes</h2>
@@ -379,11 +567,14 @@ export default function Home() {
             {[
               { q: "Combien de temps pour installer un chatbot ?", a: "Entre 2 et 5 jours ouvrés selon la complexité. Un chatbot FAQ basique est opérationnel en 48h." },
               { q: "L'IA remplace-t-elle mes employés ?", a: "Non. Elle gère 80% des questions répétitives et transfère les cas complexes à votre équipe." },
-              { q: "Mes données sont-elles sécurisées ?", a: "Oui. Hébergement en France, serveurs dédiés, aucun partage avec des tiers." },
-              { q: "Puis-je tester gratuitement ?", a: "Absolument. Démo personnalisée gratuite avec vos propres données." },
+              { q: "La signature électronique a-t-elle une vraie valeur légale ?", a: "Oui. Nos signatures sont conformes au règlement eIDAS et ont la même valeur juridique qu'une signature manuscrite. Horodatage et traçabilité inclus." },
+              { q: "Qu'est-ce qu'une PDP pour la facturation électronique ?", a: "Une Plateforme de Dématérialisation Partenaire agréée par la DGFiP. Nous nous appuyons sur IOPOLE, PDP agréée, pour garantir la conformité à la réforme 2026." },
+              { q: "Suis-je concerné par la facturation électronique en 2026 ?", a: "Toutes les entreprises françaises assujetties à la TVA doivent pouvoir recevoir des factures électroniques dès le 1er septembre 2026. L'émission se généralisera progressivement." },
+              { q: "Mes données sont-elles sécurisées ?", a: "Oui. Hébergement en France, certifications ISO 27001 et NF 461 pour l'archivage, aucun partage avec des tiers." },
+              { q: "Puis-je tester gratuitement ?", a: "Absolument. Démo personnalisée gratuite avec vos propres données, sans carte bancaire." },
               { q: "L'IA répond-elle n'importe quoi ?", a: "Non. Si elle ne sait pas, elle propose de contacter un humain. Zéro hallucination." },
             ].map((f, i) => (
-              <ScrollReveal key={f.q} delay={i * 100}>
+              <ScrollReveal key={f.q} delay={i * 60}>
                 <details className="group border rounded-xl" style={{ borderColor: B, background: "var(--surface)" }}>
                   <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-sm" style={{ fontFamily: F }}>
                     {f.q}
@@ -397,262 +588,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Visual Divider — Chapter transition */}
-      <div className="relative py-2">
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 30%, var(--bg) 70%, var(--bg-alt) 100%)" }} />
-        <div className="relative max-w-xs mx-auto flex items-center gap-4 py-6">
-          <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, transparent, ${B})` }} />
-          <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: TL }}>Et aussi</span>
-          <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, ${B}, transparent)` }} />
-        </div>
-      </div>
-
-      {/* Prestations dev — Au-delà de l'IA */}
-      <section id="dev-services" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal variant="left">
-            <div className="max-w-xl mb-14">
-              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Au-delà de l&apos;IA</p>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
-                Une agence tech complète à votre service
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed" style={{ color: T }}>
-                Sites web, outils métier, apps mobiles, intégrations — on construit aussi tout ce qui digitalise votre activité.
-              </p>
-            </div>
-          </ScrollReveal>
-          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { emoji: "🌐", title: "Création de site internet", desc: "Sites vitrine, landing pages, e-commerce. Design moderne, responsive, optimisé SEO et performances." },
-              { emoji: "🛠️", title: "Outils web sur mesure", desc: "Back-offices, espaces clients, dashboards, CRM internes. Le SaaS interne taillé à votre métier." },
-              { emoji: "📱", title: "Applications mobiles", desc: "Apps iOS et Android en Flutter. Code partagé, déploiement App Store et Play Store gérés." },
-              { emoji: "♻️", title: "Refonte & migration", desc: "Vous avez un site daté ou un outil legacy ? On modernise sans rupture, en gardant vos données et vos URLs." },
-              { emoji: "🔌", title: "Intégrations & API", desc: "Stripe, Resend, CRM, ERP, comptabilité, n8n, webhooks. On connecte vos outils entre eux." },
-              { emoji: "🛡️", title: "Hébergement & maintenance", desc: "Infra Coolify, monitoring temps réel, sauvegardes, mises à jour sécurité. Vous codez, on garde tout en ligne." },
-            ].map((s) => (
-              <ScrollReveal key={s.title} variant="scale">
-                <div className="card-hover group border rounded-2xl p-7 transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
-                  <span className="text-3xl mb-4 block">{s.emoji}</span>
-                  <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{s.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: T }}>{s.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* Portfolio / Realisations */}
-      <section id="expertises" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal variant="left">
-            <div className="max-w-xl mb-14">
-              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Réalisations</p>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
-                Des projets livrés, des clients satisfaits
-              </h2>
-              <p className="mt-3 text-sm" style={{ color: T }}>
-                Découvrez quelques-unes des solutions livrées par notre équipe.
-              </p>
-            </div>
-          </ScrollReveal>
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              {
-                name: "Kerala Restaurant Indien",
-                category: "App Mobile + Site Web",
-                badge: "Restauration",
-                emoji: "🍛",
-                bg: "linear-gradient(135deg, #ea580c 0%, #ef4444 100%)",
-                desc: "Application mobile et site internet de commande en ligne pour restaurant. Les clients parcourent le menu, passent commande et paient directement depuis leur téléphone ou le site web. Backoffice complet pour la gestion du menu, des commandes et des réservations.",
-                tech: ["Next.js", "Flutter", "Symfony", "Stripe", "Coolify"],
-              },
-              {
-                name: "OSR Sécurité",
-                category: "Web + Mobile",
-                badge: "Sécurité",
-                emoji: "🛡️",
-                bg: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
-                desc: "Outil de gestion métier complet pour société de sécurité. Gestion des clients, des sites, des agents, du matériel et planification CRM. Interface interne pour piloter l'ensemble de l'activité au quotidien.",
-                tech: ["Flutter", "Symfony", "WebSocket", "Firebase", "MySQL"],
-              },
-              {
-                name: "TPR Transport",
-                category: "App Mobile + Outils Web",
-                badge: "Transport",
-                emoji: "🚛",
-                bg: "linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)",
-                desc: "Application mobile et outils de gestion pour entreprise de transport. Création de devis, gestion des contrats, facturation et suivi des missions. Un outil métier complet pour gérer l'activité de A à Z.",
-                tech: ["Flutter", "Symfony", "GPS", "MySQL", "REST API"],
-              },
-              {
-                name: "GMAXX",
-                category: "Web",
-                badge: "BTP",
-                emoji: "🏗️",
-                bg: "linear-gradient(135deg, #f97316 0%, #f59e0b 100%)",
-                desc: "Outil de gestion BTP complet. Bons de commande, suivi d'avancement des travaux, factures de situation, gestion des documents, suivi des chantiers et tableau de bord analytique pour piloter l'activité.",
-                tech: ["Symfony", "MySQL", "Chart.js", "REST API", "Hostinger"],
-              },
-              {
-                name: "Francilienne Distribution",
-                category: "App Mobile + Site de commande",
-                badge: "Distribution",
-                emoji: "📦",
-                bg: "linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)",
-                desc: "Site de commande B2B et application mobile pour distributeur alimentaire. Les clients professionnels passent leurs commandes en ligne, suivent leurs livraisons et gèrent leur historique. Back-office complet pour l'équipe interne.",
-                tech: ["Symfony", "Flutter", "MySQL", "PHP", "Bootstrap"],
-              },
-            ].map((project) => (
-              <ScrollReveal key={project.name} variant="scale">
-                <div className="card-hover group border rounded-2xl overflow-hidden transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
-                  <div className="h-32 flex items-center justify-center relative" style={{ background: project.bg }}>
-                    <span className="text-5xl">{project.emoji}</span>
-                    <span className="absolute top-3 left-3 text-xs font-semibold text-white px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(8px)" }}>
-                      {project.badge}
-                    </span>
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <h3 className="text-lg font-bold" style={{ fontFamily: F }}>{project.name}</h3>
-                      <span className="text-xs font-medium px-2 py-0.5 rounded-full shrink-0" style={{ background: "var(--bg-alt)", color: T }}>{project.category}</span>
-                    </div>
-                    <p className="text-sm leading-relaxed mb-4" style={{ color: T }}>{project.desc}</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tech.map((t) => (
-                        <span key={t} className="px-2 py-0.5 rounded-md text-xs font-medium border" style={{ borderColor: B, color: T }}>{t}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* Signature Électronique */}
-      <section id="signature" className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <ScrollReveal>
-            <div className="text-center mb-14">
-              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Nouveau service</p>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
-                Signature électronique professionnelle
-              </h2>
-              <p className="mt-4 text-sm max-w-xl mx-auto leading-relaxed" style={{ color: T }}>
-                Faites signer vos documents en ligne en toute sécurité. Contrats, devis, bons de commande — envoyez, signez et archivez en quelques clics.
-              </p>
-            </div>
-          </ScrollReveal>
-          <StaggerContainer className="grid md:grid-cols-3 gap-5 mb-10">
-            {[
-              { emoji: "✍️", title: "Signature légale", desc: "Signature électronique conforme eIDAS. Valeur juridique identique à une signature manuscrite." },
-              { emoji: "📧", title: "Envoi par email", desc: "Votre client reçoit un lien sécurisé, signe depuis son téléphone ou son ordinateur. Simple et rapide." },
-              { emoji: "🔒", title: "Sécurisé & archivé", desc: "Documents chiffrés, horodatés et archivés. Traçabilité complète de chaque signature." },
-            ].map((card) => (
-              <ScrollReveal key={card.title} variant="scale">
-                <div className="card-hover border rounded-2xl p-7 transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
-                  <span className="text-3xl mb-4 block">{card.emoji}</span>
-                  <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{card.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: T }}>{card.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </StaggerContainer>
-          <ScrollReveal variant="scale">
-            <div className="border rounded-2xl p-8 sm:p-10 text-center" style={{ borderColor: A, background: "var(--surface)" }}>
-              <div className="text-4xl sm:text-5xl font-bold mb-2" style={{ fontFamily: F, color: A }}>3€ par signature</div>
-              <p className="text-sm mb-6" style={{ color: T }}>Sans abonnement. Payez uniquement ce que vous utilisez.</p>
-              <a href="#contact" className="inline-flex text-white font-semibold px-7 py-3.5 rounded-xl text-sm transition hover:opacity-90 hover:shadow-lg" style={{ background: A }}>
-                Essayer gratuitement
-              </a>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Facturation électronique 2026 */}
-      <section id="facturation-electronique" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
-        <div className="max-w-5xl mx-auto">
-          <ScrollReveal>
-            <div className="text-center mb-14">
-              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Nouveau — échéance septembre 2026</p>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
-                Facturation électronique, mise en conformité clé en main
-              </h2>
-              <p className="mt-4 text-sm max-w-xl mx-auto leading-relaxed" style={{ color: T }}>
-                On installe et on paramètre votre PDP agréée DGFiP, on connecte votre logiciel de facturation, on forme vos équipes. À partir de 19€/mois.
-              </p>
-            </div>
-          </ScrollReveal>
-          <StaggerContainer className="grid md:grid-cols-3 gap-5 mb-10">
-            {[
-              { emoji: "📤", title: "Émission & réception", desc: "Envoyez et recevez vos factures au format Factur-X / UBL via une plateforme agréée par l'État." },
-              { emoji: "🗄️", title: "Archivage légal 10 ans", desc: "Conservation NF 461, e-reporting TVA automatisé, hébergement France, certification ISO 27001." },
-              { emoji: "🧑‍💼", title: "On vous accompagne", desc: "Audit gratuit, paramétrage, formation équipe, support réactif. Pas seul face à la réforme." },
-            ].map((card) => (
-              <ScrollReveal key={card.title} variant="scale">
-                <div className="card-hover border rounded-2xl p-7 transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
-                  <span className="text-3xl mb-4 block">{card.emoji}</span>
-                  <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{card.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: T }}>{card.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </StaggerContainer>
-          <ScrollReveal variant="scale">
-            <div className="border rounded-2xl p-8 sm:p-10 text-center" style={{ borderColor: A, background: "var(--surface)" }}>
-              <div className="text-xs font-semibold mb-2" style={{ color: A }}>Propulsé par IOPOLE, PDP agréée DGFiP</div>
-              <div className="text-3xl sm:text-4xl font-bold mb-2" style={{ fontFamily: F }}>À partir de <span style={{ color: A }}>19€/mois</span></div>
-              <p className="text-sm mb-6" style={{ color: T }}>3 formules : Essentiel, Pro, Business. Sans engagement.</p>
-              <a href="/facturation-electronique" className="inline-flex text-white font-semibold px-7 py-3.5 rounded-xl text-sm transition hover:opacity-90 hover:shadow-lg" style={{ background: A }}>
-                Découvrir l&apos;offre complète →
-              </a>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Trust / CTA Banner */}
-      <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <ScrollReveal variant="scale">
-            <div className="relative rounded-3xl overflow-hidden px-8 py-16 sm:px-16 sm:py-20 text-center" style={{ background: "linear-gradient(135deg, #0dca7a 0%, #0ba968 50%, #099b5a 100%)" }}>
-              {/* Decorative circles */}
-              <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10" style={{ background: "white", transform: "translate(30%, -30%)" }} />
-              <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-10" style={{ background: "white", transform: "translate(-30%, 30%)" }} />
-              <div className="relative">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4" style={{ fontFamily: F }}>
-                  Rejoignez les entreprises qui automatisent avec nous
-                </h2>
-                <p className="text-white/80 max-w-lg mx-auto mb-8 text-sm leading-relaxed">
-                  Plus de 80 entreprises nous font confiance pour leurs agents IA. Pourquoi pas vous ?
-                </p>
-                <div className="flex flex-wrap justify-center gap-8 mb-10">
-                  {[
-                    { val: "150+", label: "Projets livrés" },
-                    { val: "99.9%", label: "Uptime garanti" },
-                    { val: "< 24h", label: "Temps de réponse" },
-                  ].map((s) => (
-                    <div key={s.label} className="text-center">
-                      <div className="text-2xl font-bold text-white" style={{ fontFamily: F }}>{s.val}</div>
-                      <div className="text-xs text-white/70">{s.label}</div>
-                    </div>
-                  ))}
-                </div>
-                <a href="#contact" className="inline-flex items-center gap-2 bg-white font-semibold px-8 py-3.5 rounded-xl text-sm transition hover:shadow-lg hover:opacity-95" style={{ color: "#0dca7a" }}>
-                  Demander une démo gratuite
-                  <span>→</span>
-                </a>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
       {/* Contact */}
-      <section id="contact" className="py-24 px-6">
+      <section id="contact" className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
         <ScrollReveal variant="scale">
           <div className="max-w-xl mx-auto border rounded-3xl p-8 sm:p-12" style={{ borderColor: B, background: "var(--surface)" }}>
             <div className="text-center mb-8">
