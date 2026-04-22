@@ -277,8 +277,15 @@ export default function Home() {
     { id: "tarifs-facturation", label: "Facturation électronique", note: "PDP agréée DGFiP. Certifications ISO 27001 & NF 461.", plans: facturationPlans },
   ];
 
-  // Logos clients (placeholders — Sayn remplacera)
-  const clientLogos = ["Client A", "Client B", "Client C", "Client D", "Client E", "Client F"];
+  // Clients emcorp
+  const clientLogos = [
+    { name: "TPR Transport", sector: "Transport & logistique" },
+    { name: "Kerala Restaurant", sector: "Restauration" },
+    { name: "Gmaxx", sector: "Services" },
+    { name: "OSR Sécurité", sector: "Sécurité privée" },
+    { name: "HK Entreprise", sector: "BTP" },
+    { name: "La Francilienne de Distribution", sector: "Distribution" },
+  ];
 
   // Testimonials (placeholders)
   const testimonials = [
@@ -436,14 +443,15 @@ export default function Home() {
               </h2>
             </div>
           </ScrollReveal>
-          <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mb-16">
-            {clientLogos.map((name) => (
-              <ScrollReveal key={name} variant="scale">
+          <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-16">
+            {clientLogos.map((c) => (
+              <ScrollReveal key={c.name} variant="scale">
                 <div
-                  className="h-20 flex items-center justify-center border rounded-xl text-sm font-semibold transition-all grayscale opacity-60 hover:grayscale-0 hover:opacity-100"
+                  className="h-24 flex flex-col items-center justify-center border rounded-xl text-center px-3 transition-all hover:shadow-md"
                   style={{ borderColor: B, background: "var(--surface)", color: T, fontFamily: F }}
                 >
-                  {name}
+                  <div className="font-semibold text-sm leading-tight">{c.name}</div>
+                  <div className="text-[11px] mt-1" style={{ color: TL }}>{c.sector}</div>
                 </div>
               </ScrollReveal>
             ))}
