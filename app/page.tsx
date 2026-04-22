@@ -5,6 +5,7 @@ import ChatWidget from "./components/ChatWidget";
 import BackToTop from "./components/BackToTop";
 import ContactForm from "./components/ContactForm";
 import MobileNav from "./components/MobileNav";
+import Footer from "./components/Footer";
 
 export default function Home() {
   const F = "var(--font-display)";
@@ -744,19 +745,8 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t py-8 px-6" style={{ borderColor: B }}>
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs" style={{ color: TL }}>
-          <div className="flex items-center gap-2">
-            <img src="/logo-icon-green.svg" alt="emcorp" className="h-5 w-auto" />
-            <span className="font-semibold" style={{ color: "var(--text)", fontFamily: F }}>emcorp</span>
-          </div>
-          <div className="flex gap-5">
-            <a href="mailto:contact@emcorp.io" className="hover:text-[var(--text)] transition">contact@emcorp.io</a>
-          </div>
-          <span>© 2026 emcorp.io — Agence IA & Développement</span>
-        </div>
-      </footer>
+      {/* Footer global emcorp.io */}
+      <Footer />
 
       {/* Chatbot Widget */}
       <ChatWidget />

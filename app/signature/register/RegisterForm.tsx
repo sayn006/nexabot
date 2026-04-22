@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 
 import { registerAction, type RegisterState } from "./actions";
+import { CGU_VERSION } from "../cgu/constants";
 
 const F = "var(--font-display)";
 const A = "var(--accent)";
@@ -80,6 +82,47 @@ export default function RegisterForm() {
         </p>
         {state?.fieldErrors?.password && (
           <p className="mt-1 text-xs text-red-600">{state.fieldErrors.password}</p>
+        )}
+      </div>
+
+      <div>
+        <label
+          className="flex items-start gap-3 cursor-pointer select-none p-3 rounded-lg border transition hover:bg-[var(--bg-alt)]"
+          style={{ borderColor: B }}
+        >
+          <input
+            type="checkbox"
+            name="cguAccepted"
+            value="1"
+            required
+            defaultChecked={false}
+            className="mt-0.5 h-4 w-4 rounded accent-[var(--accent)] cursor-pointer shrink-0"
+          />
+          <input type="hidden" name="cguVersion" value={CGU_VERSION} />
+          <span className="text-[13px] leading-relaxed" style={{ color: "var(--text-sub)" }}>
+            J&apos;ai lu et j&apos;accepte les{" "}
+            <Link
+              href="/signature/cgu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold underline decoration-[var(--accent)] underline-offset-2 hover:text-[var(--text)]"
+            >
+              Conditions Generales d&apos;Utilisation
+            </Link>{" "}
+            et la{" "}
+            <Link
+              href="/confidentialite"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold underline decoration-[var(--accent)] underline-offset-2 hover:text-[var(--text)]"
+            >
+              Politique de confidentialite
+            </Link>{" "}
+            d&apos;emcorp.io (version {CGU_VERSION}).
+          </span>
+        </label>
+        {state?.fieldErrors?.cguAccepted && (
+          <p className="mt-1 text-xs text-red-600">{state.fieldErrors.cguAccepted}</p>
         )}
       </div>
 
