@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import ScrollReveal from "./components/ScrollReveal";
 import StaggerContainer from "./components/StaggerContainer";
 import ChatWidget from "./components/ChatWidget";
@@ -95,6 +96,89 @@ export default function Home() {
     </svg>
   );
 
+  // Logos stack technique (SVG inline pour performance et fiabilité)
+  const LogoN8n = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true">
+      <g fill="none" stroke="#EA4B71" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="32" r="5" fill="#EA4B71" />
+        <circle cx="32" cy="18" r="5" fill="#EA4B71" />
+        <circle cx="32" cy="46" r="5" fill="#EA4B71" />
+        <circle cx="52" cy="32" r="5" fill="#EA4B71" />
+        <path d="M17 32h10" />
+        <path d="M37 18h10" />
+        <path d="M37 46h10" />
+        <path d="M32 23v8" />
+        <path d="M32 33v8" />
+      </g>
+    </svg>
+  );
+  const LogoOpenAI = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true">
+      <path fill="#10A37F" d="M59.8 27a14.3 14.3 0 0 0-1.2-11.8 14.5 14.5 0 0 0-15.6-6.9A14.5 14.5 0 0 0 19.7 14a14.3 14.3 0 0 0-9.6 6.9 14.5 14.5 0 0 0 1.8 17 14.3 14.3 0 0 0 1.2 11.8 14.5 14.5 0 0 0 15.6 6.9 14.3 14.3 0 0 0 10.8 4.8c6.3 0 11.8-4 13.8-9.9A14.3 14.3 0 0 0 61.6 44a14.5 14.5 0 0 0-1.8-17Zm-21.4 30a10.7 10.7 0 0 1-6.9-2.5l.3-.2 11.6-6.7a1.9 1.9 0 0 0 .9-1.6V29.7l4.9 2.8a.2.2 0 0 1 .1.1v13.6c0 5.9-4.9 10.7-10.9 10.7ZM14.9 47.3a10.6 10.6 0 0 1-1.3-7.1l.3.2 11.6 6.7a1.9 1.9 0 0 0 1.9 0l14.2-8.2v5.6a.2.2 0 0 1-.1.2L29.8 51.3a10.7 10.7 0 0 1-14.9-4Zm-3-24.8a10.6 10.6 0 0 1 5.6-4.7V32a1.9 1.9 0 0 0 .9 1.6l14.2 8.2-4.9 2.8a.2.2 0 0 1-.2 0L15.8 37.8a10.7 10.7 0 0 1-3.9-15.3Zm40.5 9.4L38.2 23.7l4.9-2.8a.2.2 0 0 1 .2 0l11.7 6.8a10.7 10.7 0 0 1-1.7 19.3V32.4a1.9 1.9 0 0 0-.9-1.5Zm4.9-7.4-.3-.2-11.6-6.8a1.9 1.9 0 0 0-1.9 0L29.3 25.7v-5.6a.2.2 0 0 1 .1-.2l11.7-6.7a10.7 10.7 0 0 1 16 11.3ZM26.6 35.3l-4.9-2.8a.2.2 0 0 1-.1-.2V18.7c0-5.9 4.9-10.7 10.9-10.7a10.7 10.7 0 0 1 6.9 2.5l-.3.2-11.6 6.7a1.9 1.9 0 0 0-.9 1.5ZM29.3 29.6 35.6 26l6.3 3.6v7.2L35.6 40.4l-6.3-3.6Z" />
+    </svg>
+  );
+  const LogoAnthropic = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true">
+      <path fill="#CC785C" d="M19.2 12.8h9l14.4 38.4h-9L30.8 43H17.6l-2.8 8.2h-8.8Zm1.2 22.8h8L24.2 23.4Z" />
+      <path fill="#1F1F1E" d="M41 12.8h8.6l14.4 38.4h-8.6L41 12.8Z" />
+    </svg>
+  );
+  const LogoDocuSeal = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true">
+      <path fill="#0B6B3A" d="M16 8h22l12 12v36a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4Z" />
+      <path fill="#34C876" d="M38 8v10a4 4 0 0 0 4 4h8Z" />
+      <path d="M20 36c4-6 12-6 14 0M22 44c6 6 12 0 18-6" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <circle cx="42" cy="40" r="2.4" fill="#fff" />
+    </svg>
+  );
+  const LogoIopole = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true">
+      <rect x="8" y="10" width="48" height="44" rx="6" fill="#1D4ED8" />
+      <path d="M18 22h28M18 32h28M18 42h18" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
+      <circle cx="46" cy="42" r="3" fill="#FBBF24" />
+    </svg>
+  );
+
+  type StackItem = {
+    id: string;
+    Logo: () => ReactElement;
+    LogoAlt?: () => ReactElement;
+    name: string;
+    tagline: string;
+    desc: string;
+  };
+  const stackItems: StackItem[] = [
+    {
+      id: "n8n",
+      Logo: LogoN8n,
+      name: "n8n",
+      tagline: "Orchestration de workflows",
+      desc: "Connectez des dizaines d'APIs, automatisez n'importe quelle tâche métier. Nos agents IA et automatisations sont tous construits sur n8n pour une fiabilité industrielle.",
+    },
+    {
+      id: "llm",
+      Logo: LogoOpenAI,
+      LogoAlt: LogoAnthropic,
+      name: "OpenAI / Anthropic",
+      tagline: "Modèles IA de dernière génération",
+      desc: "GPT-4 et Claude 4 pour des conversations naturelles et des analyses fines, avec fallback multi-modèles selon vos contraintes.",
+    },
+    {
+      id: "docuseal",
+      Logo: LogoDocuSeal,
+      name: "DocuSeal",
+      tagline: "Signature électronique eIDAS",
+      desc: "Self-hosted sur notre infra sécurisée. Horodatage, traçabilité, conformité européenne — aucun lock-in fournisseur.",
+    },
+    {
+      id: "iopole",
+      Logo: LogoIopole,
+      name: "IOPOLE",
+      tagline: "PDP agréée DGFiP",
+      desc: "Plateforme de dématérialisation partenaire pour la facturation électronique 2026. Certifications ISO 27001 et NF 461.",
+    },
+  ];
+
   // Produits phares
   const products = [
     {
@@ -102,6 +186,7 @@ export default function Home() {
       Icon: IconMessageCircle,
       title: "Chatbot IA",
       desc: "Automatisez votre SAV 24/7 avec des agents IA personnalisés pour restaurants, e-commerce et PME.",
+      stack: "Stack : n8n + OpenAI/Anthropic + connecteurs WhatsApp/Telegram/Email",
       anchor: "#tarifs-chatbot",
     },
     {
@@ -109,6 +194,7 @@ export default function Home() {
       Icon: IconFileSignature,
       title: "Signature électronique",
       desc: "Signez vos contrats, devis et bons de commande en ligne. Certifié eIDAS, valeur juridique conforme.",
+      stack: "Stack : DocuSeal self-hosted + archivage horodaté",
       anchor: "#tarifs-signature",
     },
     {
@@ -116,6 +202,7 @@ export default function Home() {
       Icon: IconFileText,
       title: "Facturation électronique",
       desc: "Mise en conformité 2026 clé en main via notre PDP partenaire IOPOLE, agréée DGFiP.",
+      stack: "Stack : IOPOLE (PDP agréée DGFiP) + connecteurs ERP via n8n",
       anchor: "#tarifs-facturation",
     },
   ];
@@ -317,6 +404,7 @@ export default function Home() {
           </a>
           <div className="hidden md:flex items-center gap-7 text-[13px] font-medium" style={{ color: T }}>
             <a href="#produits" className="hover:text-[var(--text)] transition">Produits</a>
+            <a href="#stack" className="hover:text-[var(--text)] transition">Stack</a>
             <a href="/signature" className="hover:text-[var(--text)] transition">Signature</a>
             <a href="/facturation-electronique" className="hover:text-[var(--text)] transition">Facturation élec.</a>
             <a href="#process" className="hover:text-[var(--text)] transition">Fonctionnement</a>
@@ -421,7 +509,12 @@ export default function Home() {
                     <p.Icon />
                   </div>
                   <h3 className="text-lg font-bold mb-2" style={{ fontFamily: F }}>{p.title}</h3>
-                  <p className="text-sm leading-relaxed mb-6 flex-1" style={{ color: T }}>{p.desc}</p>
+                  <p className="text-sm leading-relaxed mb-4 flex-1" style={{ color: T }}>{p.desc}</p>
+                  {p.stack && (
+                    <p className="text-[11px] italic mb-5 leading-relaxed" style={{ color: TL }}>
+                      {p.stack}
+                    </p>
+                  )}
                   <a href={p.anchor} className="inline-flex items-center gap-1.5 text-sm font-semibold transition hover:gap-2.5" style={{ color: A }}>
                     En savoir plus
                     <span aria-hidden="true">→</span>
@@ -433,8 +526,71 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 2bis. Notre stack technique */}
+      <section id="stack" className="py-24 px-6" style={{ background: "var(--bg-alt)", borderTop: `1px solid ${B}` }}>
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <p className="text-sm font-semibold mb-2" style={{ color: A }}>Notre stack technique</p>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ fontFamily: F }}>
+                Propulsé par des outils professionnels éprouvés
+              </h2>
+              <p className="mt-4 text-sm max-w-2xl mx-auto leading-relaxed" style={{ color: T }}>
+                Nous sommes <span className="font-semibold" style={{ color: "var(--text)" }}>agence expert n8n</span> : la plateforme open-source d&apos;orchestration de workflows qui alimente vos chatbots IA et vos automatisations métier. Pas de lock-in, pas de boîte noire.
+              </p>
+            </div>
+          </ScrollReveal>
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {stackItems.map((s) => (
+              <ScrollReveal key={s.id} variant="scale">
+                <div className="card-hover h-full flex flex-col border rounded-2xl p-6 transition-all hover:border-[var(--accent)]/30" style={{ borderColor: B, background: "var(--surface)" }}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl border" style={{ borderColor: B, background: "var(--bg-alt)" }}>
+                      <s.Logo />
+                    </div>
+                    {s.LogoAlt && (
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl border" style={{ borderColor: B, background: "var(--bg-alt)" }}>
+                        <s.LogoAlt />
+                      </div>
+                    )}
+                  </div>
+                  <h3 className="text-base font-bold" style={{ fontFamily: F }}>{s.name}</h3>
+                  <p className="text-xs font-semibold mb-3" style={{ color: A }}>{s.tagline}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: T }}>{s.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </StaggerContainer>
+          <ScrollReveal>
+            <div className="mt-12 border rounded-2xl p-7 max-w-4xl mx-auto" style={{ borderColor: B, background: "var(--surface)" }}>
+              <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold mb-1" style={{ fontFamily: F }}>Automatisation sur mesure</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: T }}>
+                    Connectez tous vos outils. Automatisez vos process. 400+ intégrations natives via n8n.
+                  </p>
+                  <ul className="mt-3 space-y-1.5 text-xs" style={{ color: TL }}>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: A }} />
+                      Nouvelle commande Shopify → facture Sage → notification WhatsApp
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: A }} />
+                      Form de contact → enrichissement lead → Slack + CRM
+                    </li>
+                  </ul>
+                </div>
+                <a href="#contact" className="shrink-0 text-white text-[13px] font-semibold px-5 py-3 rounded-xl transition hover:opacity-90 text-center" style={{ background: A }}>
+                  Discuter d&apos;une automatisation
+                </a>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* 3. Ils nous ont fait confiance */}
-      <section className="py-24 px-6" style={{ background: "var(--bg-alt)" }}>
+      <section className="py-24 px-6" style={{ background: "var(--surface)" }}>
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-12">
@@ -576,6 +732,8 @@ export default function Home() {
             {[
               { q: "Combien de temps pour installer un chatbot ?", a: "Entre 2 et 5 jours ouvrés selon la complexité. Un chatbot FAQ basique est opérationnel en 48h." },
               { q: "L'IA remplace-t-elle mes employés ?", a: "Non. Elle gère 80% des questions répétitives et transfère les cas complexes à votre équipe." },
+              { q: "Qu'est-ce que n8n ?", a: "n8n est une plateforme open-source d'automatisation de workflows. Nous l'utilisons pour construire vos chatbots et automatisations : ça garantit des solutions robustes, auditables et transférables." },
+              { q: "Puis-je reprendre la main sur mes workflows n8n ?", a: "Oui. Tous les workflows que nous créons peuvent être exportés (JSON) et migrés vers votre propre instance n8n le jour où vous souhaitez internaliser. Pas de lock-in." },
               { q: "La signature électronique a-t-elle une vraie valeur légale ?", a: "Oui. Nos signatures sont conformes au règlement eIDAS et ont la même valeur juridique qu'une signature manuscrite. Horodatage et traçabilité inclus." },
               { q: "Qu'est-ce qu'une PDP pour la facturation électronique ?", a: "Une Plateforme de Dématérialisation Partenaire agréée par la DGFiP. Nous nous appuyons sur IOPOLE, PDP agréée, pour garantir la conformité à la réforme 2026." },
               { q: "Suis-je concerné par la facturation électronique en 2026 ?", a: "Toutes les entreprises françaises assujetties à la TVA doivent pouvoir recevoir des factures électroniques dès le 1er septembre 2026. L'émission se généralisera progressivement." },
