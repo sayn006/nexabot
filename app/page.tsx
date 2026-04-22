@@ -1,6 +1,7 @@
 import ScrollReveal from "./components/ScrollReveal";
 import StaggerContainer from "./components/StaggerContainer";
 import ChatWidget from "./components/ChatWidget";
+import BackToTop from "./components/BackToTop";
 import ContactForm from "./components/ContactForm";
 import MobileNav from "./components/MobileNav";
 
@@ -310,10 +311,10 @@ export default function Home() {
       {/* Navbar */}
       <nav className="sticky top-0 z-50 border-b" style={{ borderColor: B, background: "rgba(250,250,248,0.9)", backdropFilter: "blur(12px)" }}>
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
+          <a href="/" aria-label="Retour à l'accueil" className="flex items-center gap-2.5 hover:opacity-80 transition">
             <img src="/logo-icon-green.svg" alt="emcorp" className="h-7 w-auto" />
             <span className="font-bold tracking-tight" style={{ fontFamily: F }}>emcorp</span>
-          </div>
+          </a>
           <div className="hidden md:flex items-center gap-7 text-[13px] font-medium" style={{ color: T }}>
             <a href="#produits" className="hover:text-[var(--text)] transition">Produits</a>
             <a href="/signature" className="hover:text-[var(--text)] transition">Signature</a>
@@ -629,6 +630,9 @@ export default function Home() {
 
       {/* Chatbot Widget */}
       <ChatWidget />
+
+      {/* Back to top */}
+      <BackToTop />
     </>
   );
 }
