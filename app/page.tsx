@@ -227,9 +227,9 @@ export default function Home() {
       price: "19€",
       sub: "/mois",
       setup: "Setup offert",
-      desc: "TPE et auto-entrepreneurs (< 50 factures/mois)",
+      desc: "TPE et auto-entrepreneurs (jusqu'à 20 factures/mois)",
       features: [
-        "Jusqu'à 50 factures émises/mois",
+        "Jusqu'à 20 factures émises/mois",
         "Réception illimitée fournisseurs",
         "Formats Factur-X, UBL, CII",
         "E-reporting TVA automatisé",
@@ -243,9 +243,9 @@ export default function Home() {
       price: "49€",
       sub: "/mois",
       setup: "Setup : 250€",
-      desc: "PME jusqu'à 500 factures/mois",
+      desc: "PME jusqu'à 100 factures/mois",
       features: [
-        "Jusqu'à 500 factures émises/mois",
+        "Jusqu'à 100 factures émises/mois",
         "Connecteurs Sage, EBP, Pennylane, Cegid",
         "API pour intégration ERP",
         "Signature électronique incluse",
