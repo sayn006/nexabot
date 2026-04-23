@@ -48,6 +48,12 @@ export async function hasSignatureToken(): Promise<boolean> {
 
 /**
  * Recupere l'utilisateur connecte, ou null si pas de cookie / token invalide.
+ *
+ * Le backend Symfony (`/api/signature/me`) renvoie actuellement :
+ *   { success: true, client: { id, email, raison_sociale, siret, actif, subscription } }
+ *
+ * On normalise ce payload vers notre type `SignatureUser` (id, email, name),
+ * en supportant aussi les anciennes formes `{ user: {...} }` et payload racine.
  */
 export async function getSignatureUser(): Promise<SignatureUser | null> {
   const cookieStore = await cookies();
@@ -55,19 +61,61 @@ export async function getSignatureUser(): Promise<SignatureUser | null> {
   if (!token) return null;
 
   try {
-    const data = await apiFetch<SignatureUser | { user: SignatureUser }>(
-      "/api/signature/me"
-    );
-    if (data && typeof data === "object" && "user" in data) {
-      return (data as { user: SignatureUser }).user;
-    }
-    return data as SignatureUser;
+    const data = await apiFetch<unknown>("/api/signature/me");
+    return normalizeSignatureUser(data);
   } catch (err) {
     if (err instanceof SignatureApiError && err.status === 401) {
       return null;
     }
     return null;
   }
+}
+
+/**
+ * Normalise la reponse `/api/signature/me` (ou /login /register) vers SignatureUser.
+ * Tolerant aux trois formes : { client }, { user }, ou directement le user a la racine.
+ */
+export function normalizeSignatureUser(data: unknown): SignatureUser | null {
+  if (!data || typeof data !== "object") return null;
+  const d = data as Record<string, unknown>;
+
+  // Forme Symfony : { success, client: {...} }
+  if (d.client && typeof d.client === "object") {
+    return buildUserFromRaw(d.client as Record<string, unknown>);
+  }
+
+  // Forme historique : { user: {...} }
+  if (d.user && typeof d.user === "object") {
+    return buildUserFromRaw(d.user as Record<string, unknown>);
+  }
+
+  // Forme directe
+  if (typeof d.id === "number" && typeof d.email === "string") {
+    return buildUserFromRaw(d);
+  }
+
+  return null;
+}
+
+function buildUserFromRaw(raw: Record<string, unknown>): SignatureUser | null {
+  const id = typeof raw.id === "number" ? raw.id : Number(raw.id);
+  const email = typeof raw.email === "string" ? raw.email : null;
+  if (!id || Number.isNaN(id) || !email) return null;
+
+  // Le backend utilise `raison_sociale`, le type local expose `name`.
+  const name =
+    (typeof raw.name === "string" && raw.name) ||
+    (typeof raw.raison_sociale === "string" && raw.raison_sociale) ||
+    null;
+
+  const createdAt =
+    typeof raw.createdAt === "string"
+      ? raw.createdAt
+      : typeof raw.created_at === "string"
+        ? raw.created_at
+        : undefined;
+
+  return { id, email, name, createdAt };
 }
 
 /**
