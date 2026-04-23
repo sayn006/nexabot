@@ -278,12 +278,12 @@ export default function Home() {
     },
     {
       name: "Pack 50",
-      price: "99€",
+      price: "49€",
       sub: "/pack",
       setup: "Validité 12 mois",
       desc: "Pour un volume régulier",
       features: [
-        "50 signatures incluses (1,98€/signature)",
+        "50 signatures incluses (0,98€/signature)",
         "Multi-signataires illimités",
         "Modèles de documents",
         "Relances automatiques",
@@ -293,7 +293,7 @@ export default function Home() {
     },
     {
       name: "Illimité",
-      price: "49€",
+      price: "99€",
       sub: "/mois",
       setup: "Sans engagement",
       desc: "Signatures sans limite",

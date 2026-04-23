@@ -37,7 +37,7 @@ export const SIGNATURE_PLANS: PlanDefinition[] = [
   {
     id: "pack_50",
     name: "Pack 50",
-    priceLabel: "99 €",
+    priceLabel: "49 €",
     billingLabel: "par mois",
     description: "50 signatures incluses chaque mois.",
     features: [
@@ -51,7 +51,7 @@ export const SIGNATURE_PLANS: PlanDefinition[] = [
   {
     id: "illimite",
     name: "Illimite",
-    priceLabel: "49 €",
+    priceLabel: "99 €",
     billingLabel: "par mois",
     description: "Signatures illimitees pour les gros volumes.",
     features: [

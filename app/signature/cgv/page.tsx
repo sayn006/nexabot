@@ -51,13 +51,13 @@ export default function CgvPage() {
           <tr>
             <td><strong>Pack 50</strong></td>
             <td>Achat de 50 signatures prepayees</td>
-            <td>99 € (soit 1,98 € / signature)</td>
+            <td>49 € (soit 0,98 € / signature)</td>
             <td>Validite 12 mois a compter de l&apos;achat</td>
           </tr>
           <tr>
             <td><strong>Illimite</strong></td>
             <td>Abonnement mensuel</td>
-            <td>49 € par mois</td>
+            <td>99 € par mois</td>
             <td>Mensuel sans engagement, tacite reconduction</td>
           </tr>
         </tbody>

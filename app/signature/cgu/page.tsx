@@ -134,13 +134,13 @@ export default function CguPage() {
           </tr>
           <tr>
             <td><strong>Pack 50</strong></td>
-            <td>99 € / pack (12 mois)</td>
+            <td>49 € / pack (12 mois)</td>
             <td>Aucun</td>
             <td>50 signatures valables 12 mois</td>
           </tr>
           <tr>
             <td><strong>Illimite</strong></td>
-            <td>49 € / mois</td>
+            <td>99 € / mois</td>
             <td>Mensuel sans engagement</td>
             <td>Signatures en nombre illimite, API, support prioritaire</td>
           </tr>
