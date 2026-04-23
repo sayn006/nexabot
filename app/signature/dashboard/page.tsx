@@ -9,6 +9,7 @@ import {
 } from "@/lib/signature/billing";
 import type { SignatureSubmission } from "@/lib/signature/types";
 
+import OnboardingChecklist from "../components/OnboardingChecklist";
 import ProtectedShell from "../components/ProtectedShell";
 import { formatDate, statusBadge } from "../lib/ui";
 
@@ -54,6 +55,17 @@ export default async function DashboardPage() {
   const subStatus = statusLabel(subscription?.status ?? null);
   const unlimited = currentPlan === "illimite";
 
+  // Onboarding : un plan pay_per_use "actif" par defaut compte comme plan
+  // si le user a deja fait au moins un paiement ou inscrit une carte. Ici,
+  // on considere l'etape 1 validee des qu'un plan est en statut 'active'
+  // (pay_per_use, pack_50 ou illimite).
+  const hasActivePlan =
+    !!currentPlan && subscription?.status === "active";
+  const hasSubmission = submissions.length > 0;
+  const hasCompletedSubmission = submissions.some(
+    (s) => s.status === "completed"
+  );
+
   const F = "var(--font-display)";
   const T = "var(--text-sub)";
   const TL = "var(--text-light)";
@@ -86,6 +98,12 @@ export default async function DashboardPage() {
           Suivez vos demandes de signature en un coup d&apos;oeil.
         </p>
       </div>
+
+      <OnboardingChecklist
+        hasActivePlan={hasActivePlan}
+        hasSubmission={hasSubmission}
+        hasCompletedSubmission={hasCompletedSubmission}
+      />
 
       <div
         className="border rounded-2xl p-5 mb-6 flex flex-wrap items-center justify-between gap-4"

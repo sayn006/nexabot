@@ -39,7 +39,7 @@ export default async function BillingPage() {
 
   return (
     <ProtectedShell user={user}>
-      <div className="mb-8">
+      <div className="mb-6">
         <h1
           className="text-2xl sm:text-3xl font-bold tracking-tight"
           style={{ fontFamily: F }}
@@ -50,6 +50,47 @@ export default async function BillingPage() {
           Gerez votre abonnement et consultez l&apos;historique des paiements.
         </p>
       </div>
+
+      <aside
+        aria-label="Information paiement"
+        className="border rounded-xl px-4 py-3 mb-6 flex items-start gap-3 text-sm"
+        style={{
+          borderColor: "rgba(13,202,122,0.25)",
+          background: "rgba(13,202,122,0.06)",
+        }}
+      >
+        <span
+          className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+          style={{ background: A, color: "white" }}
+          aria-hidden="true"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              fillRule="evenodd"
+              d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </span>
+        <div>
+          <p className="font-semibold" style={{ color: A }}>
+            Paiement TEST securise via Stripe
+          </p>
+          <p className="text-xs mt-1" style={{ color: T }}>
+            Ton credit est active automatiquement apres paiement. Aucun
+            prelevement reel pendant la phase de test — utilise la carte
+            <code className="mx-1 px-1 rounded bg-black/5 text-[11px]">
+              4242 4242 4242 4242
+            </code>
+            pour valider ton parcours.
+          </p>
+        </div>
+      </aside>
 
       {error && (
         <div
